@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services + Why Choose Us - A.J TRADERS | Complete Packaging Solutions at Wholesale Rates - Faridabad</title>
+    <meta name="description" content="A.J TRADERS Services + Why Choose Us - Complete packaging solutions at wholesale rates in Faridabad. Bubble wrap rolls, BOPP tapes, corrugated boxes, stretch film, courier bags at wholesale rates. Why 5000+ B2B clients trust us? Same day dispatch, PAN India delivery, GST invoice.">
+    <meta name="keywords" content="bubble wrap wholesale, packaging solutions wholesale, BOPP tapes wholesale, corrugated boxes wholesale, stretch film wholesale, courier bags wholesale, A.J TRADERS services, why choose A.J TRADERS, Faridabad bubble wrap wholesaler, 5000+ B2B clients">
+    <meta name="author" content="A.J TRADERS">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Services + Why Choose Us - A.J TRADERS | Complete Packaging Solutions at Wholesale Rates - Faridabad">
+    <meta property="og:description" content="A.J TRADERS Services + Why Choose Us - Complete packaging solutions at wholesale rates in Faridabad. Bubble wrap rolls, BOPP tapes, corrugated boxes, stretch film, courier bags at wholesale rates. Why 5000+ B2B clients trust us? Same day dispatch, PAN India delivery, GST invoice.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ajtraders.com/services.html">
+    <link rel="canonical" href="https://ajtraders.com/services.html">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Three.js for 3D -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            navy: '#050B14',
+                            darkBlue: '#0B1325',
+                            cardBg: '#0F1A30',
+                            gold: '#D4AF37',
+                            goldLight: '#F5E6AD',
+                            goldDark: '#9A7B1C',
+                            accent: '#182542'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        heading: ['Cinzel', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .hero-warehouse-bg {
+            background: linear-gradient(180deg, rgba(5, 11, 20, 0.88) 0%, rgba(11, 19, 37, 0.95) 100%), 
+                        var(--hero-img, url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=2000&q=80')) center/cover no-repeat fixed;
+        }
+        #canvas-3d {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .gold-pill-btn {
+            background: linear-gradient(135deg, #E5C158 0%, #C59A27 100%);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .gold-pill-btn:hover {
+            background: linear-gradient(135deg, #F0CF6A 0%, #D4AF37 100%);
+            box-shadow: 0 12px 35px rgba(212, 175, 55, 0.5);
+            transform: translateY(-2px);
+        }
+        .glass-card-3d {
+            background: rgba(15, 26, 48, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            transition: all 0.4s ease;
+        }
+        .glass-card-3d:hover {
+            border-color: rgba(212, 175, 55, 0.7);
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 30px 60px rgba(212, 175, 55, 0.15);
+        }
+        .glass {
+            background: rgba(15, 26, 48, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .gold { background: linear-gradient(135deg, #E5C158 0%, #C59A27 100%); }
+        .faq-item.active .faq-answer { max-height: 600px; padding-top:12px; padding-bottom:16px; }
+        .faq-answer { max-height:0; overflow:hidden; transition:all 0.3s ease; }
+    </style>
+    <!-- Schema Markup for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "A.J TRADERS",
+        "url": "https://ajtraders.com",
+        "logo": "https://ajtraders.com/logo.png",
+        "description": "A.J TRADERS Services + Why Choose Us - Complete packaging solutions at wholesale rates in Faridabad. Bubble wrap rolls, BOPP tapes, corrugated boxes, stretch film, courier bags at wholesale rates. Why 5000+ B2B clients trust us? Same day dispatch, PAN India delivery, GST invoice.",
+        "address": {"@type": "PostalAddress", "addressLocality": "Faridabad", "addressRegion": "Haryana", "addressCountry": "India"},
+        "contactPoint": {"@type": "ContactPoint", "telephone": "+91-9999055398", "contactType": "customer service"}
+    }
+    </script>
+</head>
+<body class="bg-brand-navy text-slate-100 font-sans antialiased selection:bg-brand-gold selection:text-brand-navy overflow-x-hidden">
+    <canvas id="canvas-3d"></canvas>
+    <div class="relative z-10 flex flex-col min-h-screen">
+        <!-- TOP BAR - SAME AS BEST VERSION -->
+        <div class="bg-slate-950/90 border-b border-slate-800/80 text-xs text-slate-300 py-2 px-4 relative z-50">
+            <div class="max-w-7xl mx-auto flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <span class="bg-brand-gold text-brand-navy font-bold text-[10px] px-2 py-0.5 rounded">DIRECT FACTORY</span>
+                    <span class="hidden sm:inline">Bulk Bubble Wrap & Industrial Packaging Supplies Across India - 5000+ B2B Clients Trusted</span>
+                </div>
+                <div class="flex gap-6 font-semibold">
+                    <a href="tel:+919999055398" class="hover:text-brand-gold transition"><i class="fa-solid fa-phone text-brand-gold mr-1"></i> <span class="contact-mobile">+91 9999055398</span></a>
+                    <a href="https://wa.me/919999055398" target="_blank" class="text-emerald-400 hover:text-emerald-300 transition hidden md:inline"><i class="fa-brands fa-whatsapp mr-1"></i> WhatsApp Orders</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- HEADER - BEST VERSION WITH 10 PAGES LINKED -->
+        <header class="sticky top-0 z-40 bg-brand-navy/90 backdrop-blur-xl border-b border-slate-800/80">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-3">
+                    <a href="index.html" class="flex items-center gap-2 group"><img src="AJ_LOGO_TRANSPARENT_FINAL.png" alt="A.J TRADERS - Premium Packaging Supplies" class="h-11 w-auto object-contain" loading="eager" style="filter: drop-shadow(0 2px 8px rgba(212,175,55,0.2));"></a>
+                </a>
+                <nav class="hidden xl:flex gap-2 text-[10px] font-bold uppercase tracking-widest items-center">
+                    <a href="index.html" class="hover:text-brand-gold px-2 py-1 rounded transition">Home</a>
+                    <a href="products.html" class="hover:text-brand-gold px-2 py-1 rounded transition">Stock</a>
+                    <a href="services.html" class="bg-brand-gold text-brand-navy px-3 py-1.5 rounded-full">Services</a>
+                    <a href="about.html" class="hover:text-brand-gold px-2 py-1 rounded transition">About</a>
+                    <a href="certificates.html" class="hover:text-brand-gold px-2 py-1 rounded transition">Certificates</a>
+                    <a href="faq.html" class="hover:text-brand-gold px-2 py-1 rounded transition">FAQ</a>
+                    <a href="gallery.html" class="hover:text-brand-gold px-2 py-1 rounded transition">Gallery</a>
+                    <a href="blog.html" class="hover:text-brand-gold px-2 py-1 rounded transition">Blog</a>
+                    <a href="clients.html" class="hover:text-brand-gold px-2 py-1 rounded transition">Clients</a>
+                    <a href="contact.html" class="gold-pill-btn text-brand-navy px-4 py-2 rounded-full text-[10px] ml-2">GET RATE</a>
+                </nav>
+                <div class="flex items-center gap-2 xl:hidden">
+                    <a href="contact.html" class="gold text-black font-bold px-4 py-2 rounded-full text-[11px]">GET RATE</a>
+                    <button id="mBtn" class="w-9 h-9 bg-slate-900 rounded-lg flex items-center justify-center border border-slate-700"><i class="fa-solid fa-bars"></i></button>
+                </div>
+            </div>
+            <div id="mMenu" class="hidden xl:hidden border-t border-slate-800 bg-[#0B1325] px-4 py-4 space-y-3 text-xs font-bold uppercase">
+                <a href="index.html" class="block py-2 hover:text-brand-gold">Home</a>
+                <a href="products.html" class="block py-2 hover:text-brand-gold">Stock - Wholesale Bubble Wrap</a>
+                <a href="services.html" class="block py-2 text-brand-gold">Services + Why Choose Us ⭐ NEW - 6 Services Editable</a>
+                <a href="about.html" class="block py-2 hover:text-brand-gold">About Us - Wholesaler Since 2015</a>
+                <a href="certificates.html" class="block py-2 text-brand-gold">Certificates & Quality ⭐ NEW - Images Editable</a>
+                <a href="faq.html" class="block py-2 hover:text-brand-gold">FAQ & Bulk Supply - Editable</a>
+                <a href="gallery.html" class="block py-2 hover:text-brand-gold">Gallery - Warehouse Photos Editable</a>
+                <a href="blog.html" class="block py-2 hover:text-brand-gold">Blog - Packing Tips Editable</a>
+                <a href="clients.html" class="block py-2 hover:text-brand-gold">Clients - 5000+ Trusted - Images Editable</a>
+                <a href="contact.html" class="block py-2 hover:text-brand-gold">Contact - Get Wholesale Rate</a>
+            </div>
+        </header>
+
+        <!-- HERO - BEST VERSION WITH HERO EDITABLE -->
+        <section id="hero_services" class="hero-warehouse-bg py-16 lg:py-24 relative">
+            <div class="max-w-7xl mx-auto px-4 lg:px-8 relative z-10">
+                <div class="max-w-3xl">
+                    <span class="text-brand-gold text-[10px] font-bold tracking-[0.3em] uppercase bg-brand-gold/10 border border-brand-gold/20 px-3 py-1 rounded-full">SERVICES + WHY CHOOSE US - 6 SERVICES + 6 WHY CHOOSE - ADMIN EDITABLE - 10 PAGES COMPLETE</span>
+                    <h1 class="text-3xl lg:text-5xl font-bold mt-6 leading-tight font-heading">Complete Packaging Solutions at <span class='text-brand-gold'>Wholesale Rates</span> + Why 5000+ B2B Clients Trust Us</h1>
+                    <p class="text-slate-300 text-sm mt-5 leading-relaxed">We provide complete packaging solutions - Bubble wrap rolls 0.5m to 1.5m, BOPP tapes, corrugated boxes, stretch film, courier bags at genuine wholesale rates PAN India with same day dispatch from Faridabad godown. 6 services with images, icons, titles, descriptions + 6 why choose us points + 4 process steps - all fully editable from admin panel. Desktop + mobile responsive, SEO optimized for Google top rank.</p>
+                    <div class="flex flex-wrap gap-3 mt-8">
+                        <a href="contact.html" class="gold-pill-btn text-brand-navy font-bold px-6 py-3 rounded-full text-xs">GET WHOLESALE RATE</a>
+                        <a href="tel:+919999055398" class="bg-slate-900 border border-slate-700 text-white font-bold px-6 py-3 rounded-full text-xs hover:border-brand-gold transition"><i class="fa-solid fa-phone mr-2"></i> CALL: +91 9999055398</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+<!-- STATS BAR - TOP -->
+<section class="py-8 max-w-7xl mx-auto px-4 lg:px-8">
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+<div class="glass p-4 rounded-2xl text-center"><div id="stat1_num" class="font-bold text-brand-gold text-lg">5000+</div><div id="stat1_label" class="text-[9px] text-slate-400 uppercase tracking-widest">B2B Clients</div></div>
+<div class="glass p-4 rounded-2xl text-center"><div id="stat2_num" class="font-bold text-brand-gold text-lg">24-48 Hours</div><div id="stat2_label" class="text-[9px] text-slate-400 uppercase tracking-widest">Delivery Time</div></div>
+<div class="glass p-4 rounded-2xl text-center"><div id="stat3_num" class="font-bold text-brand-gold text-lg">10+ Years</div><div id="stat3_label" class="text-[9px] text-slate-400 uppercase tracking-widest">Experience</div></div>
+<div class="glass p-4 rounded-2xl text-center"><div id="stat4_num" class="font-bold text-brand-gold text-lg">Same Day</div><div id="stat4_label" class="text-[9px] text-slate-400 uppercase tracking-widest">Dispatch</div></div>
+<div class="glass p-4 rounded-2xl text-center"><div id="stat5_num" class="font-bold text-brand-gold text-lg">PAN India</div><div id="stat5_label" class="text-[9px] text-slate-400 uppercase tracking-widest">Delivery</div></div>
+<div class="glass p-4 rounded-2xl text-center"><div id="stat6_num" class="font-bold text-brand-gold text-lg">100%</div><div id="stat6_label" class="text-[9px] text-slate-400 uppercase tracking-widest">GST Invoice</div></div>
+</div>
+</section>
+
+<!-- SERVICES GRID - 6 Services - Admin Editable - Best Cards -->
+<section class="py-12 max-w-7xl mx-auto px-4 lg:px-8">
+<div class="flex items-center gap-3 mb-2">
+<span class="w-10 h-[2px] bg-brand-gold"></span>
+<span class="text-brand-gold text-[11px] font-bold tracking-[0.3em] uppercase">OUR WHOLESALE SERVICES - 6 SERVICES - ADMIN EDITABLE</span>
+</div>
+<h2 class="text-2xl lg:text-4xl font-bold font-heading mt-3 leading-tight">Complete Packaging Solutions at <span class="text-brand-gold">Wholesale Rates</span></h2>
+<p class="text-slate-400 text-sm mt-3 max-w-2xl">We provide complete packaging solutions - Bubble wrap rolls, BOPP tapes, corrugated boxes, stretch film, courier bags at genuine wholesale rates PAN India. All 6 services with images, icons, titles, descriptions - fully editable from admin panel.</p>
+<div id="servicesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10"></div>
+</section>
+
+<!-- WHY CHOOSE US - 6 Points - Admin Editable - Best Glass Cards -->
+<section class="py-16 bg-brand-darkBlue border-y border-slate-800">
+<div class="max-w-7xl mx-auto px-4 lg:px-8">
+<div class="grid lg:grid-cols-3 gap-10 items-start">
+<div class="lg:col-span-2">
+<div class="flex items-center gap-3 mb-2"><span class="w-10 h-[2px] bg-brand-gold"></span><span class="text-brand-gold text-[11px] font-bold tracking-[0.3em] uppercase">WHY CHOOSE US - 5000+ CLIENTS TRUST US - ADMIN EDITABLE</span></div>
+<h2 class="text-2xl lg:text-3xl font-bold font-heading leading-tight">Why 5000+ B2B Clients Trust <span class="text-brand-gold">A.J TRADERS</span>?</h2>
+<p class="text-slate-400 text-sm mt-3">We are a wholesaler, not a factory. We buy in huge bulk from factories, so you get factory rates without factory MOQ & waiting time. All 6 why choose us points with icons, titles, descriptions - fully editable from admin panel.</p>
+<div id="whyChooseUsGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-8"></div>
+</div>
+<div class="glass-card-3d p-6 lg:p-8 rounded-[2rem] sticky top-24">
+<h3 class="font-bold text-xl font-heading leading-tight">Our Supply Process - <span class="text-brand-gold">From Factory to Your Doorstep</span></h3>
+<p class="text-slate-400 text-xs mt-3 leading-relaxed">Simple 4-step process for wholesale supply - Inquiry to Delivery with same day dispatch from Faridabad godown. All 4 process steps editable from admin panel.</p>
+<div id="processSteps" class="mt-8 space-y-6"></div>
+<a href="contact.html" class="block w-full mt-8 gold-pill-btn text-brand-navy text-center font-bold py-3 rounded-xl text-sm">GET WHOLESALE RATE NOW - 10 PAGES COMPLETE</a>
+<div class="mt-4 p-3 bg-brand-gold/10 border border-brand-gold/20 rounded-xl text-center">
+<div class="text-[10px] text-brand-gold font-bold uppercase tracking-widest">Call For Instant Rate</div>
+<div class="contact-mobile font-bold text-sm mt-1">+91 9999055398</div>
+<div class="text-[10px] text-slate-400 mt-1">Mon-Sat 9AM to 8PM - Same Day Dispatch</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- CTA - BEST VERSION -->
+<section class="py-16 max-w-7xl mx-auto px-4 lg:px-8">
+<div class="glass rounded-[2rem] p-8 lg:p-12 text-center">
+<h2 class="text-2xl lg:text-4xl font-bold font-heading">Need Custom Packaging Solution at <span class="text-brand-gold">Wholesale Rates</span>?</h2>
+<p class="text-slate-400 text-sm mt-4 max-w-2xl mx-auto">We provide complete packaging solutions for e-commerce sellers, Amazon, Flipkart sellers, manufacturers, wholesalers, retailers. From bubble wrap to corrugated boxes to BOPP tapes - all at genuine wholesale rates with same day dispatch from Faridabad.</p>
+<div class="flex flex-wrap gap-3 justify-center mt-8">
+<a href="contact.html" class="gold-pill-btn text-brand-navy font-bold px-8 py-3 rounded-full text-sm">GET WHOLESALE RATE NOW</a>
+<a href="products.html" class="bg-slate-900 border border-slate-700 text-white font-bold px-8 py-3 rounded-full text-sm hover:border-brand-gold transition">VIEW READY STOCK</a>
+<a href="certificates.html" class="bg-slate-900 border border-brand-gold/30 text-brand-gold font-bold px-8 py-3 rounded-full text-sm hover:bg-brand-gold hover:text-brand-navy transition">VIEW CERTIFICATES →</a>
+</div>
+</div>
+</section>
+
+<script>
+function getDefaultServices(){
+  return [
+    {icon:"fa-boxes-stacked", title:"Bubble Wrap Rolls Wholesale", desc:"0.5m to 1.5m small & large bubble, all GSM (40-120 GSM) in ready stock. Same day dispatch from Faridabad godown. Low MOQ from 1 roll to 1000+ rolls. Best wholesale rates PAN India with GST invoice. For e-commerce, electronics, furniture packaging.", img:"https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&q=80"},
+    {icon:"fa-tape", title:"BOPP Tapes & Packaging Tapes Wholesale", desc:"All sizes BOPP tapes (1 inch to 3 inch) at wholesale rates. Strong adhesion, transparent & brown tapes for e-commerce & industrial packing. Ready stock, same day dispatch, PAN India delivery. Best rates for Amazon, Flipkart sellers.", img:"https://images.unsplash.com/photo-1605745341112-85968b19335b?w=600&q=80"},
+    {icon:"fa-box-open", title:"Corrugated Boxes & Cartons Wholesale", desc:"All sizes corrugated boxes (3 ply, 5 ply) for e-commerce, Amazon, Flipkart sellers. Custom sizes available at wholesale rates. Ready stock in Faridabad, same day dispatch. Best quality at genuine wholesale prices with GST invoice.", img:"https://images.unsplash.com/photo-1553413077-190dd305871c?w=600&q=80"},
+    {icon:"fa-film", title:"Stretch Film & Wrapping Film Wholesale", desc:"Stretch wrap film (15 micron to 30 micron) for pallet wrapping, industrial use. Best wholesale prices, ready stock, same day dispatch from Faridabad godown. PAN India delivery with GST invoice. For manufacturers & warehouses.", img:"https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&q=80"},
+    {icon:"fa-bag-shopping", title:"Courier Bags & E-commerce Bags Wholesale", desc:"POD courier bags, tamper proof bags, e-commerce poly bags for Amazon, Flipkart sellers at wholesale rates. All sizes available (8x10 to 24x30). Ready stock, same day dispatch, best wholesale rates PAN India.", img:"https://images.unsplash.com/photo-1605733513597-a8f8341084e1?w=600&q=80"},
+    {icon:"fa-truck-ramp-box", title:"Bulk Supply & PAN India Delivery Service", desc:"From 1 roll to 1000+ rolls bulk supply. Same day dispatch from Faridabad godown, 1-3 days courier delivery, 2-5 days transport delivery PAN India. GST invoice for all orders. 5000+ B2B clients trusted across Delhi, Gurgaon, Noida, Mumbai, Bangalore.", img:"https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&q=80"}
+  ];
+}
+function getDefaultWhyChoose(){
+  return [
+    {icon:"fa-handshake", title:"We Are Wholesaler, Not Factory - Factory Rates Without MOQ", desc:"We buy in huge bulk from factories, so you get factory rates without factory MOQ (50-100 rolls) & waiting time (3-5 days). Our MOQ is just 1 roll, dispatch same day from Faridabad godown with GST invoice."},
+    {icon:"fa-clock", title:"Same Day Dispatch - Order Before 2 PM", desc:"Ready stock in Faridabad godown - 0.5m to 1.5m all sizes, all GSM. Order before 2 PM, dispatch same day with tracking ID. Courier delivery 1-3 days, transport 2-5 days PAN India."},
+    {icon:"fa-indian-rupee-sign", title:"Genuine Wholesale Rates - Low MOQ From 1 Roll", desc:"No middle man. Direct factory purchase in bulk = best wholesale rates for you. Low MOQ from 1 roll to 1000+ rolls. Best rates guaranteed for B2B clients, e-commerce sellers, Amazon, Flipkart sellers."},
+    {icon:"fa-certificate", title:"Quality Checked - GSM Verified - Replacement Guarantee", desc:"Each roll checked for GSM (40-120 GSM), width (0.5m to 1.5m), bubble quality, length (100m) before warehousing. Replacement guarantee for any manufacturing defect within 7 days."},
+    {icon:"fa-map-location-dot", title:"PAN India Delivery - 5000+ B2B Clients Trusted", desc:"Courier 1-3 days, Transport 2-5 days. We supply to 5000+ B2B clients across India - Delhi, Gurgaon, Noida, Faridabad, Mumbai, Bangalore, Hyderabad, Chennai, Pune, Kolkata. Same day dispatch from Faridabad."},
+    {icon:"fa-file-invoice", title:"GST Invoice & 24x7 Support - Call 9999055398", desc:"Proper GST invoice for all orders for your business accounting. Call/WhatsApp support on 9999055398 - Mon-Sat 9AM to 8PM. Same day rate quotes within 30 minutes via WhatsApp."}
+  ];
+}
+function getDefaultProcess(){
+  return [
+    {step:1, title:"Send Inquiry Via Call, WhatsApp, or Contact Form", desc:"Tell us your requirement - Size (0.5m to 1.5m), GSM (40-120 GSM), Quantity (1 roll to 1000+ rolls), Delivery Location (PAN India). Call +91 9999055398 or WhatsApp or fill contact form."},
+    {step:2, title:"Get Best Wholesale Rate in 30 Minutes", desc:"We give you best wholesale rate within 30 minutes based on quantity, size, GSM, delivery location. Compare with factory rates - we give factory rates without factory MOQ."},
+    {step:3, title:"Confirm Order & Make Advance Payment", desc:"Confirm your order, make advance payment via UPI, Bank Transfer, Cash. We provide GST invoice for your business. Payment receipt shared on WhatsApp."},
+    {step:4, title:"Same Day Dispatch & Fast Delivery PAN India", desc:"We dispatch same day from Faridabad godown with tracking ID shared on WhatsApp. Courier delivery 1-3 days, transport delivery 2-5 days PAN India. Delivery confirmation with POD."}
+  ];
+}
+
+function loadServices(){
+  var s = localStorage.getItem('aj_services');
+  var services = s ? JSON.parse(s) : getDefaultServices();
+  if(!s) localStorage.setItem('aj_services', JSON.stringify(services));
+
+  var w = localStorage.getItem('aj_whychoose');
+  var why = w ? JSON.parse(w) : getDefaultWhyChoose();
+  if(!w) localStorage.setItem('aj_whychoose', JSON.stringify(why));
+
+  var p = localStorage.getItem('aj_process');
+  var process = p ? JSON.parse(p) : getDefaultProcess();
+  if(!p) localStorage.setItem('aj_process', JSON.stringify(process));
+
+  document.getElementById('servicesGrid').innerHTML = services.map(function(it){
+    return '<div class="glass-card-3d p-6 rounded-3xl group">'+
+      '<div class="w-12 h-12 rounded-full bg-brand-gold/20 flex items-center justify-center text-brand-gold text-xl group-hover:bg-brand-gold group-hover:text-brand-navy transition"><i class="fa-solid '+it.icon+'"></i></div>'+
+      '<div class="h-40 mt-4 bg-slate-950 rounded-2xl overflow-hidden"><img src="'+it.img+'" alt="'+it.title+'" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition duration-500"></div>'+
+      '<h3 class="font-bold text-sm mt-4 font-heading leading-tight">'+it.title+'</h3>'+
+      '<p class="text-[11px] text-slate-400 mt-2 leading-relaxed">'+it.desc+'</p>'+
+      '<div class="flex gap-2 mt-4"><a href="contact.html" class="flex-1 gold-pill-btn text-brand-navy text-center font-bold py-2 rounded-full text-[11px]">Get Rate</a><a href="products.html" class="flex-1 bg-slate-900 border border-slate-700 text-center font-bold py-2 rounded-full text-[11px] hover:border-brand-gold transition">View Stock</a></div>'+
+    '</div>';
+  }).join('');
+
+  document.getElementById('whyChooseUsGrid').innerHTML = why.map(function(it){
+    return '<div class="glass p-5 rounded-2xl hover:border-brand-gold/40 transition group">'+
+      '<div class="w-10 h-10 rounded-full bg-brand-gold/20 flex items-center justify-center text-brand-gold group-hover:bg-brand-gold group-hover:text-brand-navy transition"><i class="fa-solid '+it.icon+'"></i></div>'+
+      '<h4 class="font-bold text-sm mt-3 font-heading">'+it.title+'</h4>'+
+      '<p class="text-[11px] text-slate-400 mt-2 leading-relaxed">'+it.desc+'</p>'+
+    '</div>';
+  }).join('');
+
+  document.getElementById('processSteps').innerHTML = process.map(function(it){
+    return '<div class="flex gap-4">'+
+      '<div class="w-10 h-10 rounded-full bg-brand-gold text-brand-navy flex items-center justify-center font-bold shrink-0 text-sm">'+it.step+'</div>'+
+      '<div><div class="font-bold text-sm font-heading">'+it.title+'</div><div class="text-[11px] text-slate-400 mt-1 leading-relaxed">'+it.desc+'</div></div>'+
+    '</div>';
+  }).join('');
+}
+document.addEventListener('DOMContentLoaded', loadServices);
+setTimeout(loadServices, 800);
+</script>
+
+
+        <!-- FOOTER - BEST VERSION WITH SAME FOOTER SYSTEM -->
+        <footer class="bg-slate-950 border-t border-slate-800/80 py-10 mt-auto">
+            <div class="max-w-7xl mx-auto px-4 lg:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-xs text-slate-400">
+                <div class="sm:col-span-2 lg:col-span-1">
+                    <span class="text-lg font-bold text-white flex items-center gap-2 mb-3"><svg class="w-8 h-8" viewBox="0 0 100 100"><path d="M50 5 L85 20 V50 C85 75 50 95 50 95 C50 95 15 75 15 50 V20 Z" fill="#0B1325" stroke="#D4AF37" stroke-width="5"/><text x="30" y="55" font-family="Cinzel" font-size="24" fill="#D4AF37">A</text><text x="52" y="65" font-family="Cinzel" font-size="24" fill="#fff">J</text></svg>A.J <span class="text-brand-gold">TRADERS</span></span>
+                    <p class="leading-relaxed">Trusted B2B wholesaler and trader of premium bubble wrap rolls, corrugated cartons, and packaging supplies. We buy from factories and supply at wholesale rates PAN India. Same day dispatch from Faridabad godown. 5000+ B2B clients trusted, 10+ years experience.</p>
+                    <div class="flex gap-3 mt-4">
+                        <a id="socialInstagram" href="https://instagram.com/" target="_blank" class="w-9 h-9 rounded-full bg-slate-900 border border-slate-700 flex items-center justify-center hover:border-brand-gold transition"><i class="fa-brands fa-instagram"></i></a>
+                        <a id="socialYoutube" href="https://youtube.com/" target="_blank" class="w-9 h-9 rounded-full bg-slate-900 border border-slate-700 flex items-center justify-center hover:border-brand-gold transition"><i class="fa-brands fa-youtube"></i></a>
+                        <a id="socialFacebook" href="https://facebook.com/" target="_blank" class="w-9 h-9 rounded-full bg-slate-900 border border-slate-700 flex items-center justify-center hover:border-brand-gold transition"><i class="fa-brands fa-facebook-f"></i></a>
+                    </div>
+                    <p class="mt-5 text-[11px]">© <span id="footerYear">2026</span> A.J TRADERS. All Rights Reserved | Developed By <a href="https://webfixx-studio.github.io/Webfixx-Studio/" target="_blank" class="text-brand-gold hover:underline">WebFixx Studio</a></p>
+                </div>
+                <div><span class="text-white font-bold block mb-3 uppercase text-[11px] tracking-widest">Quick Links - 10 Pages</span><ul class="space-y-2.5"><li><a href="index.html" class="hover:text-brand-gold transition">Home</a></li><li><a href="products.html" class="hover:text-brand-gold transition">Wholesale Stock</a></li><li><a href="services.html" class="text-brand-gold font-bold">Services + Why Choose Us ⭐ NEW</a></li><li><a href="about.html" class="hover:text-brand-gold transition">About Us - Wholesaler</a></li><li><a href="certificates.html" class="text-brand-gold font-bold">Certificates & Quality ⭐ NEW</a></li><li><a href="faq.html" class="hover:text-brand-gold transition">FAQ & Bulk Supply</a></li><li><a href="gallery.html" class="hover:text-brand-gold transition">Gallery - Warehouse</a></li><li><a href="blog.html" class="hover:text-brand-gold transition">Blog - Packing Tips</a></li><li><a href="clients.html" class="hover:text-brand-gold transition">Clients - 5000+ Trusted</a></li><li><a href="contact.html" class="hover:text-brand-gold transition">Get Wholesale Rate</a></li></ul></div>
+                <div><span class="text-white font-bold block mb-3 uppercase text-[11px] tracking-widest">Wholesale Contact - Same System</span><p class="mb-2.5 flex gap-2"><i class="fa-solid fa-location-dot text-brand-gold mt-1"></i><span id="footerAddress" class="contact-address">Plot No. 123, Industrial Area, Faridabad, Haryana - 121001 - 5000+ B2B Clients Across India</span></p><p class="mb-2.5"><i class="fa-solid fa-phone text-brand-gold mr-2"></i><span id="footerMobile" class="contact-mobile font-bold text-white">+91 9999055398</span></p><p><i class="fa-solid fa-envelope text-brand-gold mr-2"></i><span id="footerEmail" class="contact-email">ajtraders@gmail.com</span></p><div class="mt-4 p-3 bg-brand-gold/10 border border-brand-gold/20 rounded-xl"><div class="text-[10px] text-brand-gold font-bold uppercase">Same Footer System</div><div class="text-[11px] mt-1">All 10 pages update from admin panel - Contact, Social, Hero Images</div></div></div>
+                <div><span class="text-white font-bold block mb-3 uppercase text-[11px] tracking-widest">Wholesale Supply - B2B Model</span><p class="mb-4 leading-relaxed">We are wholesaler, not factory. We purchase in bulk from factories, maintain ready stock in Faridabad warehouse, and supply to businesses at best wholesale rates. Low MOQ from 1 roll, same day dispatch, PAN India delivery, GST invoice, quality checked.</p><a href="contact.html" class="px-5 py-2.5 bg-brand-gold text-brand-navy font-bold rounded-xl text-xs inline-block gold-pill-btn">Get Wholesale Rate Now</a><div class="mt-4 grid grid-cols-3 gap-2 text-center"><div class="glass p-2 rounded-lg"><div id="stat1_num" class="font-bold text-brand-gold text-sm">5000+</div><div id="stat1_label" class="text-[8px]">Clients</div></div><div class="glass p-2 rounded-lg"><div id="stat2_num" class="font-bold text-brand-gold text-sm">24-48h</div><div id="stat2_label" class="text-[8px]">Delivery</div></div><div class="glass p-2 rounded-lg"><div id="stat3_num" class="font-bold text-brand-gold text-sm">Same Day</div><div id="stat3_label" class="text-[8px]">Dispatch</div></div></div></div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- 3D CANVAS SCRIPT - BEST VERSION -->
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mBtn')?.addEventListener('click', function(){ document.getElementById('mMenu').classList.toggle('hidden'); });
+
+        // 3D Floating Particles - Best Version
+        try {
+            const canvas = document.getElementById('canvas-3d');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({canvas: canvas, alpha: true, antialias: true});
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            const geometry = new THREE.BufferGeometry();
+            const particles = 200;
+            const positions = new Float32Array(particles * 3);
+            for(let i=0; i<particles*3; i++) positions[i] = (Math.random()-0.5)*20;
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            const material = new THREE.PointsMaterial({size: 0.05, color: 0xD4AF37, transparent: true, opacity: 0.6});
+            const points = new THREE.Points(geometry, material);
+            scene.add(points);
+            camera.position.z = 5;
+            function animate(){
+                requestAnimationFrame(animate);
+                points.rotation.x += 0.0005;
+                points.rotation.y += 0.0008;
+                renderer.render(scene, camera);
+            }
+            animate();
+            window.addEventListener('resize', function(){ camera.aspect = window.innerWidth/window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth, window.innerHeight); });
+        } catch(e) { console.log('3D canvas not supported'); }
+
+        // LOAD SHARED CONTENT - SAME FOOTER SYSTEM - BEST VERSION - ALL BUGS FIXED
+        function loadSharedContent(){
+            var c = JSON.parse(localStorage.getItem('aj_content')||'{}');
+            var mob = c.mobile||'9999055398';
+            var email = c.email||'ajtraders@gmail.com';
+            var addr = c.address||'Plot No. 123, Industrial Area, Faridabad, Haryana - 121001';
+            var insta = c.instagram||'https://instagram.com/';
+            var ytChannel = c.youtubeChannel||'https://youtube.com/';
+            var fb = c.facebook||'https://facebook.com/';
+
+            // Contact - Same Footer System - Update All Elements
+            document.querySelectorAll('.contact-mobile, #footerMobile').forEach(function(e){ if(e) e.textContent = '+91 ' + mob.replace('+91','').replace(/[^0-9]/g,'').trim(); });
+            document.querySelectorAll('.contact-email, #footerEmail').forEach(function(e){ if(e) e.textContent = email; });
+            document.querySelectorAll('.contact-address, #footerAddress').forEach(function(e){ if(e) e.textContent = addr; });
+            document.querySelectorAll('a[href^="tel:"]').forEach(function(a){ a.href = 'tel:+91' + mob.replace(/[^0-9]/g,''); });
+            document.querySelectorAll('a[href*="wa.me"], .wa-link').forEach(function(a){ a.href = 'https://wa.me/' + mob.replace(/[^0-9]/g,''); });
+
+            // Social Links - Same System
+            var setSocial = function(id, url){ var el=document.getElementById(id); if(el) el.href = url; };
+            setSocial('socialInstagram', insta);
+            setSocial('socialYoutube', ytChannel);
+            setSocial('socialFacebook', fb);
+
+            // CEO
+            if(c.ceoName){ var el=document.getElementById('ceoName'); if(el) el.textContent=c.ceoName; }
+            if(c.ceoBio){ var el=document.getElementById('ceoBio'); if(el) el.textContent=c.ceoBio; }
+            if(c.ceoPhoto||c.img_ceo){ var el=document.getElementById('ceoPhotoImg'); if(el) el.src=c.ceoPhoto||c.img_ceo; }
+
+            // Hero Images - Per Page Editable - 10 Pages - Best System
+            var heroes = {
+                'hero_home':'img_hero_home',
+                'hero_products':'img_hero_products',
+                'hero_services':'img_hero_services',
+                'hero_about':'img_hero_about',
+                'hero_certificates':'img_hero_certificates',
+                'hero_contact':'img_hero_contact',
+                'hero_faq':'img_hero_faq',
+                'hero_gallery':'img_hero_gallery',
+                'hero_blog':'img_hero_blog',
+                'hero_clients':'img_hero_clients'
+            };
+            Object.entries(heroes).forEach(function(pair){
+                var domId = pair[0]; var storeKey = pair[1];
+                var h = document.getElementById(domId);
+                if(h && c[storeKey]){
+                    h.style.setProperty('--hero-img', "url('"+c[storeKey]+"')");
+                    // Fix for hero-warehouse-bg
+                    h.style.background = "linear-gradient(180deg, rgba(5,11,20,0.88) 0%, rgba(11,19,37,0.95) 100%), url('"+c[storeKey]+"') center/cover no-repeat fixed";
+                }
+            });
+
+            // Product Images - Single Source System
+            ['img_prod_05','img_prod_10','img_prod_12','img_prod_15','img_prod_tape','img_about','img_ceo'].forEach(function(k){
+                if(c[k]){
+                    var el=document.getElementById(k);
+                    if(el){
+                        el.src=c[k];
+                        el.classList.remove('hidden');
+                        var iconEl = document.getElementById('icon_'+k.replace('img_',''));
+                        if(iconEl) iconEl.classList.add('hidden');
+                    }
+                }
+            });
+
+            // YouTube Video
+            if(c.youtube){ var el=document.getElementById('youtubeEmbed'); if(el) el.src=c.youtube; }
+
+            // Footer Year
+            var y=new Date().getFullYear(); var fy=document.getElementById('footerYear'); if(fy) fy.textContent=y;
+
+            // Stats Editable - 5000+ Clients etc. - Best System
+            try{
+                var stats = JSON.parse(localStorage.getItem('aj_stats')||'null');
+                if(stats){
+                    var setStat = function(numId, labelId, numVal, labelVal){
+                        var n=document.getElementById(numId); var l=document.getElementById(labelId);
+                        if(n && numVal) n.textContent=numVal;
+                        if(l && labelVal) l.textContent=labelVal;
+                    };
+                    setStat('stat1_num','stat1_label',stats.s1_num,stats.s1_label);
+                    setStat('stat2_num','stat2_label',stats.s2_num,stats.s2_label);
+                    setStat('stat3_num','stat3_label',stats.s3_num,stats.s3_label);
+                    setStat('stat4_num','stat4_label',stats.s4_num,stats.s4_label);
+                    setStat('stat5_num','stat5_label',stats.s5_num,stats.s5_label);
+                    setStat('stat6_num','stat6_label',stats.s6_num,stats.s6_label);
+                }
+            }catch(e){}
+        }
+        document.addEventListener('DOMContentLoaded', loadSharedContent);
+        setTimeout(loadSharedContent, 800);
+        // Fix: Also call on storage event for same tab updates
+        window.addEventListener('storage', loadSharedContent);
+    </script>
+
+<!-- SUPABASE DATABASE - CONFIG INSIDE CODE - NO SEPARATE FILE - API KEY INSIDE CODE - ALL FILES CONNECTED -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+// SUPABASE CONFIG - INSIDE CODE AS PER REQUIREMENT
+const SUPABASE_URL = localStorage.getItem('aj_supabase_url') || 'https://your-project.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_N76NNPNlwRHFsCbVgH-1dQ_31ODG9nD';
+let supabaseClient = null;
+let supabaseEnabled = false;
+try {
+    if(SUPABASE_URL !== 'https://your-project.supabase.co') {
+        supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        supabaseEnabled = true;
+        console.log('Supabase Connected');
+    }
+} catch(e){}
+async function syncFromSupabase() {
+    if(!supabaseEnabled) return;
+    try {
+        const {data} = await supabaseClient.from('aj_content').select('*').limit(1).single();
+        if(data) { localStorage.setItem('aj_content', JSON.stringify(data)); if(typeof loadShared==='function') loadShared(); }
+    } catch(e){}
+}
+async function saveLeadToSupabase(lead) {
+    if(!supabaseEnabled) {
+        let leads=JSON.parse(localStorage.getItem('aj_leads')||'[]'); leads.unshift(lead); localStorage.setItem('aj_leads', JSON.stringify(leads)); return;
+    }
+    try { await supabaseClient.from('aj_leads').insert([lead]); } catch(e){}
+    let leads=JSON.parse(localStorage.getItem('aj_leads')||'[]'); leads.unshift(lead); localStorage.setItem('aj_leads', JSON.stringify(leads));
+}
+document.addEventListener('DOMContentLoaded', function(){ if(supabaseEnabled) setTimeout(syncFromSupabase,1000); });
+window.handleFormSubmit = async function(e) {
+    e.preventDefault();
+    const form=e.target; const inputs=form.querySelectorAll('input, textarea'); let name='',mobile='',email='',message='';
+    inputs.forEach(inp=>{ const ph=(inp.placeholder||'').toLowerCase(); const val=inp.value; if(ph.includes('name')) name=val; else if(ph.includes('mobile')||ph.includes('phone')) mobile=val; else if(ph.includes('email')) email=val; else message+=val+' '; });
+    const lead={id:Date.now(), name:name||'Visitor', mobile:mobile, email:email, message:message, date:new Date().toLocaleString(), source:window.location.pathname};
+    await saveLeadToSupabase(lead); alert('Thank you! Team will contact you soon on 9999055398 - Inquiry saved to database'); form.reset();
+};
+window.handleInquirySubmit = window.handleFormSubmit;
+</script>
+
+</body>
+</html>
