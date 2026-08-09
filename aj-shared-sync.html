@@ -1,0 +1,60 @@
+/* A.J TRADERS — single shared content bridge. Existing UI/UX is preserved. */
+(function(){
+  'use strict';
+  const CONFIG={
+    SUPABASE_URL:'https://bijohvnrjwcgwpypebcd.supabase.co',
+    SUPABASE_ANON_KEY:'sb_publishable_N76NNPNlwRHFsCbVgH-1dQ_31ODG9nD',
+    ROW_ID:'main'
+  };
+  const KEYS=['aj_content','aj_faqs','aj_gallery','aj_stats','aj_testimonials','aj_blogs','aj_services','aj_whychoose','aj_process','aj_certificates','aj_quality','aj_products','aj_leads'];
+  const originalSetItem=Storage.prototype.setItem, originalRemoveItem=Storage.prototype.removeItem;
+  let syncing=false, timer=null, clientInstance=null, pulling=false;
+  function enabled(){return !!(CONFIG.SUPABASE_URL&&CONFIG.SUPABASE_ANON_KEY&&window.supabase);}
+  async function client(){
+    if(!enabled()) return null;
+    if(clientInstance) return clientInstance;
+    try{clientInstance=window.supabase.createClient(CONFIG.SUPABASE_URL,CONFIG.SUPABASE_ANON_KEY);window.supabaseClient=clientInstance;window.supabaseEnabled=true;return clientInstance;}
+    catch(e){console.warn('A.J TRADERS Supabase init failed',e);return null;}
+  }
+  function payload(){
+    const out={};
+    KEYS.forEach(k=>{const v=localStorage.getItem(k);if(v!==null){try{out[k]=JSON.parse(v)}catch{out[k]=v}}});
+    return out;
+  }
+  function safeLoad(){
+    try{
+      if(typeof window.loadSharedContent==='function') window.loadSharedContent();
+      if(typeof window.loadShared==='function') window.loadShared();
+      if(typeof window.renderFaqEdit==='function'&&document.getElementById('faqEditList')) window.renderFaqEdit();
+      if(typeof window.renderGalleryEdit==='function'&&document.getElementById('galleryEditGrid')) window.renderGalleryEdit();
+      if(typeof window.loadStatsForm==='function'&&document.getElementById('stat1_num')) window.loadStatsForm();
+      if(typeof window.renderTestimonialEdit==='function'&&document.getElementById('testimonialEditGrid')) window.renderTestimonialEdit();
+      if(typeof window.renderBlogEdit==='function'&&document.getElementById('blogEditList')) window.renderBlogEdit();
+      if(typeof window.renderServicesEdit==='function'&&document.getElementById('servicesEditGrid')) window.renderServicesEdit();
+      if(typeof window.renderCertsEdit==='function'&&document.getElementById('certsEditGrid')) window.renderCertsEdit();
+      applyGlobal(JSON.parse(localStorage.getItem('aj_content')||'{}'));
+    }catch(e){console.warn('A.J TRADERS content render warning',e)}
+  }
+  function apply(data){if(!data)return;KEYS.forEach(k=>{if(Object.prototype.hasOwnProperty.call(data,k)){try{originalSetItem.call(localStorage,k,JSON.stringify(data[k]))}catch{}}});safeLoad();}
+  async function pull(){if(pulling)return false;pulling=true;const sb=await client();if(!sb){pulling=false;return false;}try{const r=await sb.from('aj_site_data').select('payload,updated_at').eq('id',CONFIG.ROW_ID).maybeSingle();if(r.error)throw r.error;if(r.data&&r.data.payload){apply(r.data.payload);return true;}return false}catch(e){console.warn('A.J TRADERS shared pull failed',e);return false}finally{pulling=false}}
+  async function push(){if(syncing||pulling)return false;const sb=await client();if(!sb)return false;syncing=true;try{const body={id:CONFIG.ROW_ID,payload:payload(),updated_at:new Date().toISOString()};const r=await sb.from('aj_site_data').upsert(body,{onConflict:'id'});if(r.error)throw r.error;return true}catch(e){console.warn('A.J TRADERS shared push failed',e);return false}finally{syncing=false}}
+  function queuePush(){clearTimeout(timer);timer=setTimeout(push,350)}
+  Storage.prototype.setItem=function(k,v){originalSetItem.call(this,k,v);if(this===localStorage&&KEYS.includes(k)&&!syncing)queuePush()};
+  Storage.prototype.removeItem=function(k){originalRemoveItem.call(this,k);if(this===localStorage&&KEYS.includes(k)&&!syncing)queuePush()};
+  function applyGlobal(c){
+    if(!c)return;
+    if(c.logo) document.querySelectorAll('img').forEach(img=>{const alt=(img.alt||'').toLowerCase(),src=(img.getAttribute('src')||'').toLowerCase();if(alt.includes('a.j traders')||alt.includes('logo')||src.includes('aj_logo')||src.includes('aj-logo')||img.id==='siteLogo'||img.dataset.globalLogo==='true')img.src=c.logo});
+    if(c.whatsappUrl) document.querySelectorAll('a[href*="wa.me"],a.wa-link,[data-whatsapp]').forEach(a=>a.href=c.whatsappUrl);
+    if(c.mobile){const m=String(c.mobile).replace(/^\+91\s*/,'');document.querySelectorAll('.contact-mobile,#footerMobile').forEach(el=>el.textContent='+91 '+m);document.querySelectorAll('a[href^="tel:"]').forEach(a=>a.href='tel:+91'+m.replace(/[^0-9]/g,''));}
+    if(c.email) document.querySelectorAll('.contact-email,#footerEmail').forEach(el=>el.textContent=c.email);
+    if(c.address) document.querySelectorAll('.contact-address,#footerAddress').forEach(el=>el.textContent=c.address);
+    if(c.ceoName) document.querySelectorAll('#ceoName,.ceo-name').forEach(el=>el.textContent=c.ceoName);
+    if(c.ceoBio) document.querySelectorAll('#ceoBio,.ceo-bio').forEach(el=>el.textContent=c.ceoBio);
+    if(c.ceoPhoto) document.querySelectorAll('#ceoPhotoImg,.ceo-photo').forEach(img=>img.src=c.ceoPhoto);
+    const raw=c.youtubeRaw||c.youtube||c.youtubeEmbed||'';const id=extractYT(raw);const src=id?'https://www.youtube.com/embed/'+id+'?rel=0&modestbranding=1':(c.youtubeEmbed||c.youtube||'');if(src)document.querySelectorAll('#youtubeEmbed,#youtubeVideo').forEach(el=>el.src=src);
+  }
+  function extractYT(url){if(!url)return null;const s=String(url).trim();const m=s.match(/(?:youtube\.com\/(?:watch\?v=|shorts\/|embed\/|live\/)|youtu\.be\/)([^&?\/\s]{11})/i);return m?m[1]:null}
+  window.AJShared={pull,push,enabled,getConfig:()=>({url:CONFIG.SUPABASE_URL})};
+  window.addEventListener('DOMContentLoaded',()=>{client();pull();setTimeout(safeLoad,250)});
+  window.addEventListener('load',()=>setTimeout(safeLoad,350));
+})();
