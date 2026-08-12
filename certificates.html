@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificates & Quality - A.J TRADERS | GST, MSME, Factory Authorization, Quality Assurance - Faridabad</title>
+    <meta name="description" content="A.J TRADERS Certificates & Quality - GST certificate, MSME registered, factory authorization letters, quality checking process. Strict quality assurance - GSM verified, width checked, bubble quality tested. Only 0.5% return rate. 5000+ B2B clients trusted across India.">
+    <meta name="keywords" content="A.J TRADERS certificates, GST certificate Faridabad, MSME registered wholesaler, factory authorization, quality assurance, bubble wrap quality checking, GSM verification, 5000+ clients trusted, Faridabad bubble wrap wholesaler, PAN India delivery">
+    <meta name="author" content="A.J TRADERS">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Certificates & Quality - A.J TRADERS | GST, MSME, Factory Authorization, Quality Assurance - Faridabad">
+    <meta property="og:description" content="A.J TRADERS Certificates & Quality - GST certificate, MSME registered, factory authorization letters, quality checking process. Strict quality assurance - GSM verified, width checked, bubble quality tested. Only 0.5% return rate. 5000+ B2B clients trusted across India.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ajtraders.com/certificates.html">
+    <link rel="canonical" href="https://ajtraders.com/certificates.html">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Three.js for 3D -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="js/certificates.inline1.js"></script>
+    <style>
+        .hero-warehouse-bg {
+            background: linear-gradient(180deg, rgba(5, 11, 20, 0.88) 0%, rgba(11, 19, 37, 0.95) 100%), 
+                        var(--hero-img, url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=2000&q=80')) center/cover no-repeat fixed;
+        }
+        #canvas-3d {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .gold-pill-btn {
+            background: linear-gradient(135deg, #E5C158 0%, #C59A27 100%);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .gold-pill-btn:hover {
+            background: linear-gradient(135deg, #F0CF6A 0%, #D4AF37 100%);
+            box-shadow: 0 12px 35px rgba(212, 175, 55, 0.5);
+            transform: translateY(-2px);
+        }
+        .glass-card-3d {
+            background: rgba(15, 26, 48, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            transition: all 0.4s ease;
+        }
+        .glass-card-3d:hover {
+            border-color: rgba(212, 175, 55, 0.7);
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 30px 60px rgba(212, 175, 55, 0.15);
+        }
+        .glass {
+            background: rgba(15, 26, 48, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .gold { background: linear-gradient(135deg, #E5C158 0%, #C59A27 100%); }
+        .faq-item.active .faq-answer { max-height: 600px; padding-top:12px; padding-bottom:16px; }
+        .faq-answer { max-height:0; overflow:hidden; transition:all 0.3s ease; }
+    </style>
+    <!-- Schema Markup for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "A.J TRADERS",
+        "url": "https://ajtraders.com",
+        "logo": "https://ajtraders.com/logo.png",
+        "description": "A.J TRADERS Certificates & Quality - GST certificate, MSME registered, factory authorization letters, quality checking process. Strict quality assurance - GSM verified, width checked, bubble quality tested. Only 0.5% return rate. 5000+ B2B clients trusted across India.",
+        "address": {"@type": "PostalAddress", "addressLocality": "Faridabad", "addressRegion": "Haryana", "addressCountry": "India"},
+        "contactPoint": {"@type": "ContactPoint", "telephone": "+91-9999055398", "contactType": "customer service"}
+    }
+    </script>
+</head>
+<body class="bg-brand-navy text-slate-100 font-sans antialiased selection:bg-brand-gold selection:text-brand-navy overflow-x-hidden">
+    <canvas id="canvas-3d"></canvas>
+    <div class="relative z-10 flex flex-col min-h-screen">
+        <!-- TOP BAR - SAME AS BEST VERSION -->
+        <div class="bg-slate-950/90 border-b border-slate-800/80 text-xs text-slate-300 py-2 px-4 relative z-50">
+            <div class="max-w-7xl mx-auto flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <span class="bg-brand-gold text-brand-navy font-bold text-[10px] px-2 py-0.5 rounded">DIRECT FACTORY</span>
+                    <span class="hidden sm:inline">Bulk Bubble Wrap & Industrial Packaging Supplies Across India - 5000+ B2B Clients Trusted</span>
+                </div>
+                <div class="flex gap-6 font-semibold">
+                    <a href="tel:+919999055398" class="hover:text-brand-gold transition"><i class="fa-solid fa-phone text-brand-gold mr-1"></i> <span class="contact-mobile">+91 9999055398</span></a>
+                    <a href="https://wa.me/919999055398" target="_blank" class="text-emerald-400 hover:text-emerald-300 transition hidden md:inline"><i class="fa-brands fa-whatsapp mr-1"></i> WhatsApp Orders</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- HEADER - BEST VERSION WITH 10 PAGES LINKED -->
+        
+        <!-- HEADER - PROFESSIONAL LOGO LIKE RICHIND - 3 LINE MENU - PAGE NAMES - DIRECT LINKS -->
+        <header class="sticky top-0 z-40 bg-brand-navy/95 backdrop-blur-xl border-b border-slate-800/80">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-3 group">
+                    <div class="p-1 rounded-xl bg-slate-900 border border-brand-gold/40 shadow-xl flex items-center justify-center group-hover:border-brand-gold/70 transition">
+                        <img data-global-logo="true" src="assets/logo-main.png" alt="A.J TRADERS" class="w-10 h-10 object-contain">
+                    </div>
+                    <div>
+                        <span class="text-xl sm:text-2xl font-heading font-extrabold text-white block leading-none">A.J <span class="text-brand-gold">TRADERS</span></span>
+                        <span class="text-[9px] font-semibold text-slate-400 tracking-widest uppercase block mt-1">PREMIUM PACKAGING SUPPLIES</span>
+                    </div>
+                </a>
+                <nav class="hidden xl:flex items-center gap-1 bg-slate-950/80 border border-slate-800 p-1 rounded-full">
+                    <a href="index.html" class="nav-btn px-4 py-2 rounded-full text-slate-300 hover:text-white transition text-xs font-semibold ">Home</a>
+                    <a href="products.html" class="nav-btn px-4 py-2 rounded-full text-slate-300 hover:text-white transition text-xs font-semibold ">Products Catalog</a>
+                    <a href="services.html" class="nav-btn px-4 py-2 rounded-full text-slate-300 hover:text-white transition text-xs font-semibold ">Services</a>
+                    <a href="certificates.html" class="nav-btn px-4 py-2 rounded-full text-slate-300 hover:text-white transition text-xs font-semibold nav-link-active">Certificates</a>
+                    <a href="gallery.html" class="nav-btn px-4 py-2 rounded-full text-slate-300 hover:text-white transition text-xs font-semibold ">Gallery</a>
+                    <a href="clients.html" class="nav-btn px-4 py-2 rounded-full text-slate-300 hover:text-white transition text-xs font-semibold ">Clients</a>
+                    <a href="blog.html" class="nav-btn px-4 py-2 rounded-full text-slate-300 hover:text-white transition text-xs font-semibold ">Industry Blogs</a>
+                    <a href="about.html" class="nav-btn px-4 py-2 rounded-full text-slate-300 hover:text-white transition text-xs font-semibold ">About Us</a>
+                    <a href="faq.html" class="nav-btn px-4 py-2 rounded-full text-slate-300 hover:text-white transition text-xs font-semibold ">FAQ</a>
+                    <a href="contact.html" class="nav-btn px-4 py-2 rounded-full text-slate-300 hover:text-white transition text-xs font-semibold ">Contact Us</a>
+                    
+                </nav>
+                <div class="flex items-center gap-3">
+                    <a href="contact.html" class="hidden sm:flex gold-pill-btn text-brand-navy font-bold px-6 py-2.5 rounded-full text-xs uppercase tracking-wider items-center gap-2">
+                        <span>Get Quote</span>
+                        <div class="w-5 h-5 rounded-full bg-brand-navy text-white flex items-center justify-center"><i class="fa-solid fa-arrow-up-right text-[10px]"></i></div>
+                    </a>
+                    <button onclick="toggleMobileNav()" class="xl:hidden w-10 h-10 rounded-full bg-slate-900 border border-slate-700 flex items-center justify-center text-white hover:border-brand-gold/50 transition">
+                        <i class="fa-solid fa-bars text-lg"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="mobile-nav" class="hidden xl:hidden bg-brand-darkBlue border-b border-slate-800 p-4 space-y-1 text-sm max-h-[80vh] overflow-y-auto">
+                <a href="index.html" class="w-full text-left px-3 py-3 rounded-lg text-slate-200 hover:bg-slate-800 hover:text-brand-gold block transition ">Home</a>
+                <a href="products.html" class="w-full text-left px-3 py-3 rounded-lg text-slate-200 hover:bg-slate-800 hover:text-brand-gold block transition ">Products Catalog</a>
+                <a href="services.html" class="w-full text-left px-3 py-3 rounded-lg text-slate-200 hover:bg-slate-800 hover:text-brand-gold block transition ">Services</a>
+                <a href="certificates.html" class="w-full text-left px-3 py-3 rounded-lg text-slate-200 hover:bg-slate-800 hover:text-brand-gold block transition bg-slate-800 text-brand-gold">Certificates</a>
+                <a href="gallery.html" class="w-full text-left px-3 py-3 rounded-lg text-slate-200 hover:bg-slate-800 hover:text-brand-gold block transition ">Gallery</a>
+                <a href="clients.html" class="w-full text-left px-3 py-3 rounded-lg text-slate-200 hover:bg-slate-800 hover:text-brand-gold block transition ">Clients</a>
+                <a href="blog.html" class="w-full text-left px-3 py-3 rounded-lg text-slate-200 hover:bg-slate-800 hover:text-brand-gold block transition ">Industry Blogs</a>
+                <a href="about.html" class="w-full text-left px-3 py-3 rounded-lg text-slate-200 hover:bg-slate-800 hover:text-brand-gold block transition ">About Us</a>
+                <a href="faq.html" class="w-full text-left px-3 py-3 rounded-lg text-slate-200 hover:bg-slate-800 hover:text-brand-gold block transition ">FAQ</a>
+                <a href="contact.html" class="w-full text-left px-3 py-3 rounded-lg text-slate-200 hover:bg-slate-800 hover:text-brand-gold block transition ">Contact Us</a>
+                
+                <div class="pt-4 mt-2 border-t border-slate-800">
+                    <a href="contact.html" class="w-full gold-pill-btn text-brand-navy font-bold px-4 py-3 rounded-full text-xs uppercase flex items-center justify-center gap-2"><span>Get Wholesale Rate</span><i class="fa-solid fa-arrow-up-right text-[10px]"></i></a>
+                </div>
+            </div>
+        </header>
+
+
+        <!-- HERO - BEST VERSION WITH HERO EDITABLE -->
+        <section id="hero_certificates" class="hero-warehouse-bg py-16 lg:py-24 relative">
+            <div class="max-w-7xl mx-auto px-4 lg:px-8 relative z-10">
+                <div class="max-w-3xl">
+                    <span class="text-brand-gold text-[10px] font-bold tracking-[0.3em] uppercase bg-brand-gold/10 border border-brand-gold/20 px-3 py-1 rounded-full">CERTIFICATES & QUALITY - 6 CERTIFICATES + 5 QUALITY STEPS - ADMIN EDITABLE IMAGES - 10 PAGES COMPLETE</span>
+                    <h1 class="text-3xl lg:text-5xl font-bold mt-6 leading-tight font-heading">Certified Wholesaler - <span class='text-brand-gold'>GST, MSME, Factory Authorization & Quality Assurance</span></h1>
+                    <p class="text-slate-300 text-sm mt-5 leading-relaxed">We are a certified wholesaler with GST registration, MSME registration, factory authorization letters from top bubble wrap factories. Strict quality checking for GSM (40-120 GSM), width (0.5m to 1.5m), bubble quality (small & large bubble), length (100m). All 6 certificate images and 5 quality steps with icons, titles, descriptions - fully editable from admin panel. Only 0.5% return rate due to strict quality checking. Desktop + mobile responsive, SEO optimized for Google top rank.</p>
+                    <div class="flex flex-wrap gap-3 mt-8">
+                        <a href="contact.html" class="gold-pill-btn text-brand-navy font-bold px-6 py-3 rounded-full text-xs">GET WHOLESALE RATE</a>
+                        <a href="tel:+919999055398" class="bg-slate-900 border border-slate-700 text-white font-bold px-6 py-3 rounded-full text-xs hover:border-brand-gold transition"><i class="fa-solid fa-phone mr-2"></i> CALL: +91 9999055398</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+<section class="py-12 max-w-7xl mx-auto px-4 lg:px-8">
+<div class="flex items-center gap-3 mb-2"><span class="w-10 h-[2px] bg-brand-gold"></span><span class="text-brand-gold text-[11px] font-bold tracking-[0.3em] uppercase">OUR CERTIFICATES & DOCUMENTS - 6 CERTIFICATES - ADMIN EDITABLE IMAGES</span></div>
+<h2 class="text-2xl lg:text-4xl font-bold font-heading leading-tight">Certified Wholesaler - <span class="text-brand-gold">GST, MSME, Factory Authorization</span></h2>
+<p class="text-slate-400 text-sm mt-3 max-w-2xl">We are a certified wholesaler with GST registration, MSME registration, factory authorization letters from top bubble wrap factories. All 6 certificate images with titles and descriptions - fully editable from admin panel. Click to enlarge certificates.</p>
+<div id="certificatesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10"></div>
+</section>
+
+<section class="py-16 bg-brand-darkBlue border-y border-slate-800">
+<div class="max-w-7xl mx-auto px-4 lg:px-8">
+<div class="grid lg:grid-cols-3 gap-10 items-start">
+<div class="lg:col-span-2">
+<div class="flex items-center gap-3 mb-2"><span class="w-10 h-[2px] bg-brand-gold"></span><span class="text-brand-gold text-[11px] font-bold tracking-[0.3em] uppercase">QUALITY ASSURANCE PROCESS - 5 STEPS - ADMIN EDITABLE</span></div>
+<h2 class="text-2xl lg:text-3xl font-bold font-heading leading-tight">Strict Quality Checking Before <span class="text-brand-gold">Warehousing & Dispatch</span></h2>
+<p class="text-slate-400 text-sm mt-3">We are a wholesaler, not a factory. But we maintain strict quality checks before warehousing in Faridabad godown. Each roll is checked for GSM, width, bubble quality, length. All 5 quality steps with icons, titles, descriptions - fully editable from admin panel.</p>
+<div id="qualitySteps" class="space-y-6 mt-8"></div>
+</div>
+<div class="glass-card-3d p-6 lg:p-8 rounded-[2rem] sticky top-24">
+<h3 class="font-bold text-xl font-heading">How We Ensure <span class="text-brand-gold">Best Quality</span>?</h3>
+<p class="text-sm text-slate-300 mt-4 leading-relaxed">We are a wholesaler, not a factory. But we maintain strict quality checks before warehousing. Each roll is checked for GSM, width, bubble size, and length before stocking in Faridabad godown with batch labeling.</p>
+<div class="mt-6 space-y-4">
+<div class="flex gap-3"><div class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-check text-xs"></i></div><div><div class="font-bold text-xs">GSM Verification - 40 to 120 GSM</div><div class="text-[11px] text-slate-400">Each roll weight checked as per GSM standard (40 GSM to 120 GSM)</div></div></div>
+<div class="flex gap-3"><div class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-check text-xs"></i></div><div><div class="font-bold text-xs">Width & Length Checked - 0.5m to 1.5m, 100m</div><div class="text-[11px] text-slate-400">0.5m, 1.0m, 1.2m, 1.5m width verified with measuring tape, 100m length confirmed</div></div></div>
+<div class="flex gap-3"><div class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-check text-xs"></i></div><div><div class="font-bold text-xs">Bubble Quality Test - Small & Large Bubble</div><div class="text-[11px] text-slate-400">Small bubble & large bubble size, air retention, uniformity checked visually and manually</div></div></div>
+<div class="flex gap-3"><div class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-check text-xs"></i></div><div><div class="font-bold text-xs">Replacement Guarantee - 7 Days</div><div class="text-[11px] text-slate-400">Any manufacturing defect, we replace free of cost within 7 days - Customer satisfaction guaranteed</div></div></div>
+</div>
+<a href="contact.html" class="block w-full mt-8 gold-pill-btn text-brand-navy text-center font-bold py-3 rounded-xl text-sm">CONTACT FOR QUALITY SAMPLE - 10 PAGES COMPLETE</a>
+<div class="mt-4 p-3 bg-brand-gold/10 border border-brand-gold/20 rounded-xl text-center">
+<div class="text-[10px] text-brand-gold font-bold uppercase tracking-widest">Quality Assurance - 0.5% Return Rate</div>
+<div class="text-[11px] text-slate-300 mt-1">Only 0.5% return rate due to strict quality checking - 5000+ B2B clients trusted</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="py-12 max-w-7xl mx-auto px-4 lg:px-8">
+<div class="glass rounded-[2rem] p-6 lg:p-10">
+<div class="flex items-center gap-3 mb-8"><span class="w-10 h-[2px] bg-brand-gold"></span><span class="text-brand-gold text-[11px] font-bold tracking-[0.3em] uppercase">WHY B2B CLIENTS TRUST OUR QUALITY - STATS EDITABLE</span></div>
+<div class="grid md:grid-cols-3 gap-8 text-center">
+<div class="glass-card-3d p-6 rounded-2xl"><div class="w-16 h-16 rounded-full bg-brand-gold/20 flex items-center justify-center text-brand-gold text-2xl mx-auto"><i class="fa-solid fa-users"></i></div><div id="stat1_num" class="font-bold text-brand-gold text-2xl mt-4">5000+</div><div id="stat1_label" class="text-[11px] text-slate-400 uppercase tracking-widest">B2B Clients Trust Us</div><p class="text-[11px] text-slate-400 mt-2 leading-relaxed">From Delhi, Gurgaon, Noida, Mumbai, Bangalore - PAN India clients trust our quality - 10+ years experience</p></div>
+<div class="glass-card-3d p-6 rounded-2xl"><div class="w-16 h-16 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 text-2xl mx-auto"><i class="fa-solid fa-rotate-left"></i></div><div class="font-bold text-emerald-400 text-2xl mt-4">0.5%</div><div class="text-[11px] text-slate-400 uppercase tracking-widest">Return Rate Only</div><p class="text-[11px] text-slate-400 mt-2 leading-relaxed">Only 0.5% return rate due to strict quality checking before warehousing - Best quality assurance in Faridabad</p></div>
+<div class="glass-card-3d p-6 rounded-2xl"><div class="w-16 h-16 rounded-full bg-brand-gold/20 flex items-center justify-center text-brand-gold text-2xl mx-auto"><i class="fa-solid fa-award"></i></div><div id="stat3_num" class="font-bold text-brand-gold text-2xl mt-4">10+ Years</div><div id="stat3_label" class="text-[11px] text-slate-400 uppercase tracking-widest">Experience in Trade</div><p class="text-[11px] text-slate-400 mt-2 leading-relaxed">We know which factory gives best quality - Bulk purchase from top factories, quality verified, best rates</p></div>
+</div>
+<div class="flex flex-wrap gap-3 justify-center mt-10">
+<a href="services.html" class="bg-slate-900 border border-slate-700 text-white font-bold px-6 py-3 rounded-full text-xs hover:border-brand-gold transition"><i class="fa-solid fa-boxes-stacked mr-2"></i> View Services →</a>
+<a href="clients.html" class="bg-slate-900 border border-brand-gold/30 text-brand-gold font-bold px-6 py-3 rounded-full text-xs hover:bg-brand-gold hover:text-brand-navy transition"><i class="fa-solid fa-users mr-2"></i> View Clients - 5000+ Trusted →</a>
+<a href="contact.html" class="gold-pill-btn text-brand-navy font-bold px-6 py-3 rounded-full text-xs">Get Wholesale Rate Now</a>
+</div>
+</div>
+</section>
+
+<div id="certModal" class="fixed inset-0 bg-black/90 z-[100] hidden items-center justify-center p-4" onclick="closeCertModal()"><div class="max-w-4xl w-full glass rounded-3xl p-3" onclick="event.stopPropagation()"><img id="modalCertImg" src="" alt="Certificate" class="w-full max-h-[80vh] object-contain rounded-2xl"><div class="flex justify-between items-center mt-3"><span id="modalCertTitle" class="font-bold text-sm"></span><button onclick="closeCertModal()" class="w-8 h-8 bg-slate-800 rounded-full flex items-center justify-center hover:bg-slate-700 transition"><i class="fa-solid fa-xmark"></i></button></div></div></div>
+
+<script src="js/certificates.inline2.js"></script>
+
+
+        <!-- FOOTER - BEST VERSION WITH SAME FOOTER SYSTEM -->
+        <footer class="bg-slate-950 border-t border-slate-800/80 py-10 mt-auto">
+            <div class="max-w-7xl mx-auto px-4 lg:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-xs text-slate-400">
+                <div class="sm:col-span-2 lg:col-span-1">
+                    <span class="text-lg font-bold text-white flex items-center gap-2 mb-3"><svg class="w-8 h-8" viewBox="0 0 100 100"><path d="M50 5 L85 20 V50 C85 75 50 95 50 95 C50 95 15 75 15 50 V20 Z" fill="#0B1325" stroke="#D4AF37" stroke-width="5"/><text x="30" y="55" font-family="Cinzel" font-size="24" fill="#D4AF37">A</text><text x="52" y="65" font-family="Cinzel" font-size="24" fill="#fff">J</text></svg>A.J <span class="text-brand-gold">TRADERS</span></span>
+                    <p class="leading-relaxed">Trusted B2B wholesaler and trader of premium bubble wrap rolls, corrugated cartons, and packaging supplies. We buy from factories and supply at wholesale rates PAN India. Same day dispatch from Faridabad godown. 5000+ B2B clients trusted, 10+ years experience.</p>
+                    <div class="flex gap-3 mt-4">
+                        <a id="socialInstagram" href="https://instagram.com/" target="_blank" class="w-9 h-9 rounded-full bg-slate-900 border border-slate-700 flex items-center justify-center hover:border-brand-gold transition"><i class="fa-brands fa-instagram"></i></a>
+                        <a id="socialYoutube" href="https://youtube.com/" target="_blank" class="w-9 h-9 rounded-full bg-slate-900 border border-slate-700 flex items-center justify-center hover:border-brand-gold transition"><i class="fa-brands fa-youtube"></i></a>
+                        <a id="socialFacebook" href="https://facebook.com/" target="_blank" class="w-9 h-9 rounded-full bg-slate-900 border border-slate-700 flex items-center justify-center hover:border-brand-gold transition"><i class="fa-brands fa-facebook-f"></i></a>
+                    </div>
+                    <p class="mt-5 text-[11px]">© <span id="footerYear">2026</span> A.J TRADERS. All Rights Reserved | Developed By <a href="https://webfixx-studio.github.io/Webfixx-Studio/" target="_blank" class="text-brand-gold hover:underline">WebFixx Studio</a></p>
+                </div>
+                <div><span class="text-white font-bold block mb-3 uppercase text-[11px] tracking-widest">Quick Links - 10 Pages</span><ul class="space-y-2.5"><li><a href="index.html" class="hover:text-brand-gold transition">Home</a></li><li><a href="products.html" class="hover:text-brand-gold transition">Wholesale Stock</a></li><li><a href="services.html" class="text-brand-gold font-bold">Services + Why Choose Us ⭐ NEW</a></li><li><a href="about.html" class="hover:text-brand-gold transition">About Us - Wholesaler</a></li><li><a href="certificates.html" class="text-brand-gold font-bold">Certificates & Quality ⭐ NEW</a></li><li><a href="faq.html" class="hover:text-brand-gold transition">FAQ & Bulk Supply</a></li><li><a href="gallery.html" class="hover:text-brand-gold transition">Gallery - Warehouse</a></li><li><a href="blog.html" class="hover:text-brand-gold transition">Blog - Packing Tips</a></li><li><a href="clients.html" class="hover:text-brand-gold transition">Clients - 5000+ Trusted</a></li><li><a href="contact.html" class="hover:text-brand-gold transition">Get Wholesale Rate</a></li></ul></div>
+                <div><span class="text-white font-bold block mb-3 uppercase text-[11px] tracking-widest">Wholesale Contact - Same System</span><p class="mb-2.5 flex gap-2"><i class="fa-solid fa-location-dot text-brand-gold mt-1"></i><span id="footerAddress" class="contact-address">Plot No. 123, Industrial Area, Faridabad, Haryana - 121001 - 5000+ B2B Clients Across India</span></p><p class="mb-2.5"><i class="fa-solid fa-phone text-brand-gold mr-2"></i><span id="footerMobile" class="contact-mobile font-bold text-white">+91 9999055398</span></p><p><i class="fa-solid fa-envelope text-brand-gold mr-2"></i><span id="footerEmail" class="contact-email">ajtraders01052026@gmail.com</span></p><div class="mt-4 p-3 bg-brand-gold/10 border border-brand-gold/20 rounded-xl"><div class="text-[10px] text-brand-gold font-bold uppercase">Same Footer System</div><div class="text-[11px] mt-1">All 10 pages update from admin panel - Contact, Social, Hero Images</div></div></div>
+                <div><span class="text-white font-bold block mb-3 uppercase text-[11px] tracking-widest">Wholesale Supply - B2B Model</span><p class="mb-4 leading-relaxed">We are wholesaler, not factory. We purchase in bulk from factories, maintain ready stock in Faridabad warehouse, and supply to businesses at best wholesale rates. Low MOQ from 1 roll, same day dispatch, PAN India delivery, GST invoice, quality checked.</p><a href="contact.html" class="px-5 py-2.5 bg-brand-gold text-brand-navy font-bold rounded-xl text-xs inline-block gold-pill-btn">Get Wholesale Rate Now</a><div class="mt-4 grid grid-cols-3 gap-2 text-center"><div class="glass p-2 rounded-lg"><div id="footerStat1_num" class="font-bold text-brand-gold text-sm">5000+</div><div id="footerStat1_label" class="text-[8px]">Clients</div></div><div class="glass p-2 rounded-lg"><div id="stat2_num" class="font-bold text-brand-gold text-sm">24-48h</div><div id="stat2_label" class="text-[8px]">Delivery</div></div><div class="glass p-2 rounded-lg"><div id="footerStat3_num" class="font-bold text-brand-gold text-sm">Same Day</div><div id="footerStat3_label" class="text-[8px]">Dispatch</div></div></div></div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- 3D CANVAS SCRIPT - BEST VERSION -->
+    <script src="js/certificates.inline3.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="aj-shared-sync.js"></script>
+</body>
+</html>

@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A.J TRADERS | Premium B2B Packaging & Bubble Wrap Manufacturer</title>
+<meta name="description" content="A.J TRADERS is a trusted B2B wholesaler of bubble wrap and industrial packaging supplies from Faridabad with PAN India delivery.">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Three.js for 3D Interactivity -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <script src="js/index.inline1.js"></script>
+    <style>
+        /* FULL-SCREEN WAREHOUSE HERO BACKGROUND */
+        .hero-warehouse-bg {
+            background: linear-gradient(180deg, rgba(5, 11, 20, 0.88) 0%, rgba(11, 19, 37, 0.95) 100%), 
+                        url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=2000&q=80') center/cover no-repeat fixed;
+        }
+
+        /* 3D CANVAS OVERLAY */
+        #canvas-3d {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* CPC STYLE PILL BUTTON */
+        .gold-pill-btn {
+            background: linear-gradient(135deg, #E5C158 0%, #C59A27 100%);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .gold-pill-btn:hover {
+            background: linear-gradient(135deg, #F0CF6A 0%, #D4AF37 100%);
+            box-shadow: 0 12px 35px rgba(212, 175, 55, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* GLASS CARD 3D */
+        .glass-card-3d {
+            background: rgba(15, 26, 48, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            transition: all 0.4s ease;
+        .glass-card-3d:hover {
+            border-color: rgba(212, 175, 55, 0.7);
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 30px 60px rgba(212, 175, 55, 0.15);
+        }
+
+        /* TAB ANIMATION */
+        .page-view { transition: opacity 0.3s ease, transform 0.3s ease; }
+        .page-hidden { display: none !important; opacity: 0; transform: translateY(15px); }
+        .page-active { display: block !important; opacity: 1; transform: translateY(0); }
+
+        .nav-link-active {
+            background: #D4AF37 !important;
+            color: #050B14 !important;
+            font-weight: 700;
+        }
+    </style>
+<link rel="canonical" href="https://www.ajtraders.in/index.html">
+</head>
+<body class="bg-brand-navy text-slate-100 font-sans antialiased selection:bg-brand-gold selection:text-brand-navy overflow-x-hidden">
+
+    <!-- 3D FLOATING PARTICLES CANVAS -->
+    <canvas id="canvas-3d"></canvas>
+
+    <!-- MAIN APP CONTAINER -->
+    <div class="relative z-10 flex flex-col min-h-screen">
+
+        <!-- TOP BAR -->
+        <div class="bg-slate-950/90 border-b border-slate-800/80 text-xs text-slate-300 py-2 px-4 relative z-50">
+            <div class="max-w-7xl mx-auto flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <span class="bg-brand-gold text-brand-navy font-bold text-[10px] px-2 py-0.5 rounded">DIRECT FACTORY</span>
+                    <span class="hidden sm:inline">Bulk Bubble Wrap & Industrial Packaging Supplies Across India</span>
+                </div>
+                <div class="flex gap-6 font-semibold">
+                    <a href="tel:+919999055398" class="hover:text-brand-gold transition"><i class="fa-solid fa-phone text-brand-gold mr-1"></i> +91 9999055398</a>
+                    <a href="https://wa.me/919999055398" target="_blank" class="text-emerald-400 hover:text-emerald-300 transition hidden md:inline"><i class="fa-brands fa-whatsapp mr-1"></i> WhatsApp Orders</a>
+                </div>
+            </div>
+        </div>
+
+        
+        <!-- HEADER & NAVIGATION - FIXED - NO POPUP - DIRECT PAGE LINKS - PROFESSIONAL LOGO -->
+        <header class="sticky top-0 z-40 bg-brand-navy/95 backdrop-blur-xl border-b border-slate-800/80">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+                
+                <!-- BRAND LOGO - PROFESSIONAL LIKE RICHIND.ORG - TRANSPARENT BACKGROUND -->
+                <a href="index.html" class="flex items-center gap-3 group">
+                    <div class="p-1 rounded-xl bg-slate-900 border border-brand-gold/40 shadow-xl flex items-center justify-center group-hover:border-brand-gold/70 transition duration-300">
+                        <img data-global-logo="true" src="assets/logo-main.png" alt="A.J TRADERS - Premium Packaging Supplies" class="w-10 h-10 object-contain">
+                    </div>
+                    <div>
+                        <span class="text-xl sm:text-2xl font-heading font-extrabold text-white block leading-none tracking-wide">
+                            A.J <span class="text-brand-gold">TRADERS</span>
+                        </span>
+                        <span class="text-[9px] font-semibold text-slate-400 tracking-widest uppercase block mt-1">
+                            PREMIUM PACKAGING SUPPLIES
+                        </span>
+                    </div>
+                </a>
+
+                <!-- DESKTOP NAVIGATION - DIRECT LINKS TO PAGES - NO POPUP -->
+                <nav class="hidden xl:flex items-center gap-1 bg-slate-950/80 border border-slate-800 p-1 rounded-full">
+                    <a href="index.html" class="nav-btn px-4 py-2 rounded-full text-slate-300 hover:text-white transition text-xs font-semibold nav-link-active">Home</a>
+                    <a href="products.html" class="nav-btn px-4 py-2 rounded-full text-slate-300 hover:text-white transition text-xs font-semibold ">Products Catalog</a>
+                    <a href="services.html" class="nav-btn px-4 py-2 rounded-full text-slate-300 hover:text-white transition text-xs font-semibold ">Services</a>
+                    <a href="certificates.html" class="nav-btn px-4 py-2 rounded-full text-slate-300 hover:text-white transition text-xs font-semibold ">Certificates</a>
+                    <a href="gallery.html" class="nav-btn px-4 py-2 rounded-full text-slate-300 hover:text-white transition text-xs font-semibold ">Gallery</a>
+                    <a href="clients.html" class="nav-btn px-4 py-2 rounded-full text-slate-300 hover:text-white transition text-xs font-semibold ">Clients</a>
+                    <a href="blog.html" class="nav-btn px-4 py-2 rounded-full text-slate-300 hover:text-white transition text-xs font-semibold ">Industry Blogs</a>
+                    <a href="about.html" class="nav-btn px-4 py-2 rounded-full text-slate-300 hover:text-white transition text-xs font-semibold ">About Us</a>
+                    <a href="faq.html" class="nav-btn px-4 py-2 rounded-full text-slate-300 hover:text-white transition text-xs font-semibold ">FAQ</a>
+                    <a href="contact.html" class="nav-btn px-4 py-2 rounded-full text-slate-300 hover:text-white transition text-xs font-semibold ">Contact Us</a>
+                    
+                </nav>
+
+                <!-- CTA + MOBILE MENU -->
+                <div class="flex items-center gap-3">
+                    <div class="hidden sm:flex items-center gap-3">
+                        <a href="contact.html" class="gold-pill-btn text-brand-navy font-bold px-6 py-2.5 rounded-full text-xs uppercase tracking-wider flex items-center gap-2">
+                            <span>Get Quote</span>
+                            <div class="w-5 h-5 rounded-full bg-brand-navy text-white flex items-center justify-center">
+                                <i class="fa-solid fa-arrow-up-right text-[10px]"></i>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- MOBILE MENU TOGGLE - 3 LINES -->
+                    <button onclick="toggleMobileNav()" class="xl:hidden w-10 h-10 rounded-full bg-slate-900 border border-slate-700 flex items-center justify-center text-white hover:border-brand-gold/50 transition">
+                        <i class="fa-solid fa-bars text-lg"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- MOBILE NAV DROPDOWN - 3 LINE MENU - PAGE NAMES - CLICK TO OPEN PAGE - NO POPUP -->
+            <div id="mobile-nav" class="hidden xl:hidden bg-brand-darkBlue border-b border-slate-800 p-4 space-y-1 text-sm max-h-[80vh] overflow-y-auto">
+                <a href="index.html" class="w-full text-left px-3 py-3 rounded-lg text-slate-200 hover:bg-slate-800 hover:text-brand-gold block transition">Home</a>
+                <a href="products.html" class="w-full text-left px-3 py-3 rounded-lg text-slate-200 hover:bg-slate-800 hover:text-brand-gold block transition">Products Catalog</a>
+                <a href="services.html" class="w-full text-left px-3 py-3 rounded-lg text-slate-200 hover:bg-slate-800 hover:text-brand-gold block transition">Services</a>
+                <a href="certificates.html" class="w-full text-left px-3 py-3 rounded-lg text-slate-200 hover:bg-slate-800 hover:text-brand-gold block transition">Certificates</a>
+                <a href="gallery.html" class="w-full text-left px-3 py-3 rounded-lg text-slate-200 hover:bg-slate-800 hover:text-brand-gold block transition">Gallery</a>
+                <a href="clients.html" class="w-full text-left px-3 py-3 rounded-lg text-slate-200 hover:bg-slate-800 hover:text-brand-gold block transition">Clients</a>
+                <a href="blog.html" class="w-full text-left px-3 py-3 rounded-lg text-slate-200 hover:bg-slate-800 hover:text-brand-gold block transition">Industry Blogs</a>
+                <a href="about.html" class="w-full text-left px-3 py-3 rounded-lg text-slate-200 hover:bg-slate-800 hover:text-brand-gold block transition">About Us</a>
+                <a href="faq.html" class="w-full text-left px-3 py-3 rounded-lg text-slate-200 hover:bg-slate-800 hover:text-brand-gold block transition">FAQ</a>
+                <a href="contact.html" class="w-full text-left px-3 py-3 rounded-lg text-slate-200 hover:bg-slate-800 hover:text-brand-gold block transition">Contact Us</a>
+                
+                <div class="pt-4 mt-2 border-t border-slate-800">
+                    <a href="contact.html" class="w-full gold-pill-btn text-brand-navy font-bold px-4 py-3 rounded-full text-xs uppercase tracking-wider flex items-center justify-center gap-2">
+                        <span>Get Wholesale Rate</span>
+                        <i class="fa-solid fa-arrow-up-right text-[10px]"></i>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+
+        <!-- ================= PAGE 1: PUBLIC HOME PAGE ================= -->
+        <div id="page-home" class="page-view page-active flex-1">
+            
+            <!-- HERO SECTION WITH FULL WAREHOUSE BACKGROUND -->
+            <section class="hero-warehouse-bg min-h-[85vh] relative flex flex-col justify-between py-12 md:py-20 border-b border-slate-800">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full my-auto">
+                    <div class="max-w-3xl">
+                        
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-gold/15 border border-brand-gold/40 text-brand-gold text-xs font-semibold mb-6">
+                            <i class="fa-solid fa-boxes-packing"></i>
+                            <span>Who We Are & What We Supply</span>
+                        </div>
+
+                        <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold text-white leading-tight mb-6">
+                            We Protect Your Freight With <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-gold via-yellow-200 to-brand-gold">Factory Direct</span> Bubble Wrap.
+                        </h1>
+
+                        <p class="text-slate-300 text-base sm:text-lg mb-8 max-w-2xl font-light leading-relaxed">
+                            India's leading B2B supplier of heavy-density Bubble Wrap Rolls, Corrugated Cartons, and High-Adhesion Tapes. Engineered for B2B e-commerce, electronics, and freight movers.
+                        </p>
+
+                        <div class="flex flex-wrap items-center gap-4">
+                            <button onclick="openModal()" class="gold-pill-btn text-brand-navy font-bold px-8 py-4 rounded-full text-xs sm:text-sm tracking-wider uppercase flex items-center gap-3">
+                                <span>LET'S TALK</span>
+                                <div class="w-7 h-7 rounded-full bg-brand-navy text-white flex items-center justify-center">
+                                    <i class="fa-solid fa-arrow-up-right text-xs"></i>
+                                </div>
+                            </button>
+
+                            <a href="https://wa.me/919999055398?text=Hi%20A.J%20Traders,%20I%20need%20wholesale%20rates%20for%20Bubble%20Wrap." target="_blank" class="bg-emerald-600/90 hover:bg-emerald-600 text-white font-semibold px-6 py-4 rounded-full text-xs sm:text-sm flex items-center gap-2 border border-emerald-500/30 transition shadow-lg">
+                                <i class="fa-brands fa-whatsapp text-lg"></i>
+                                <span>WhatsApp</span>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- 3 FLOATING OVERLAY CARDS -->
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-12">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        
+                        <div onclick="window.location.href='products.html'" class="glass-card-3d p-6 rounded-3xl cursor-pointer group">
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="w-12 h-12 rounded-2xl bg-brand-gold/10 border border-brand-gold/40 flex items-center justify-center text-brand-gold text-xl">
+                                    <i class="fa-solid fa-scroll"></i>
+                                </div>
+                                <div class="w-8 h-8 rounded-full bg-brand-gold flex items-center justify-center text-brand-navy text-xs font-bold">
+                                    <i class="fa-solid fa-arrow-up-right"></i>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-brand-gold transition">Bubble Wrap Rolls</h3>
+                            <p class="text-slate-300 text-xs leading-relaxed mb-4">40 GSM to 120 GSM rolls. Available in 1ft, 2ft, 3ft, and 4ft width options.</p>
+                            <span class="text-xs font-bold text-brand-gold tracking-wider uppercase">View Sizes & Specs →</span>
+                        </div>
+
+                        <div onclick="window.location.href='products.html'" class="glass-card-3d p-6 rounded-3xl cursor-pointer group">
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="w-12 h-12 rounded-2xl bg-brand-gold/10 border border-brand-gold/40 flex items-center justify-center text-brand-gold text-xl">
+                                    <i class="fa-solid fa-box-open"></i>
+                                </div>
+                                <div class="w-8 h-8 rounded-full bg-brand-gold flex items-center justify-center text-brand-navy text-xs font-bold">
+                                    <i class="fa-solid fa-arrow-up-right"></i>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-brand-gold transition">Boxes & Tapes</h3>
+                            <p class="text-slate-300 text-xs leading-relaxed mb-4">High burst-factor 3-ply & 5-ply cartons along with self-adhesive BOPP tapes.</p>
+                            <span class="text-xs font-bold text-brand-gold tracking-wider uppercase">Explore Packaging →</span>
+                        </div>
+
+                        <div onclick="navigateTo('rates')" class="glass-card-3d p-6 rounded-3xl cursor-pointer group">
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="w-12 h-12 rounded-2xl bg-brand-gold/10 border border-brand-gold/40 flex items-center justify-center text-brand-gold text-xl">
+                                    <i class="fa-solid fa-warehouse"></i>
+                                </div>
+                                <div class="w-8 h-8 rounded-full bg-brand-gold flex items-center justify-center text-brand-navy text-xs font-bold">
+                                    <i class="fa-solid fa-arrow-up-right"></i>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-brand-gold transition">Industrial Wholesale</h3>
+                            <p class="text-slate-300 text-xs leading-relaxed mb-4">Direct factory pricing contracts for large warehouses & e-commerce hubs.</p>
+                            <span class="text-xs font-bold text-brand-gold tracking-wider uppercase">Get Factory Rate →</span>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- LIVE STATS COUNTER SECTION -->
+            <section class="py-12 bg-slate-950 border-b border-slate-800">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    <div>
+                        <span class="text-3xl sm:text-4xl font-extrabold text-brand-gold block">500+</span>
+                        <span class="text-xs text-slate-400 font-semibold uppercase tracking-wider mt-1 block">Active B2B Clients</span>
+                    </div>
+                    <div>
+                        <span class="text-3xl sm:text-4xl font-extrabold text-white block">15,000+</span>
+                        <span class="text-xs text-slate-400 font-semibold uppercase tracking-wider mt-1 block">Rolls Dispatched / Mo</span>
+                    </div>
+                    <div>
+                        <span class="text-3xl sm:text-4xl font-extrabold text-brand-gold block">100%</span>
+                        <span class="text-xs text-slate-400 font-semibold uppercase tracking-wider mt-1 block">Virgin Plastic Quality</span>
+                    </div>
+                    <div>
+                        <span class="text-3xl sm:text-4xl font-extrabold text-white block">24-48 Hrs</span>
+                        <span class="text-xs text-slate-400 font-semibold uppercase tracking-wider mt-1 block">Fast Delivery Track</span>
+                    </div>
+                </div>
+            </section>
+
+            
+            <!-- CEO & FOUNDER SECTION - NEW -->
+            <section id="ceo-section" class="py-16 bg-[#0B1325] border-y border-slate-800">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex items-center gap-2 mb-8"><span class="w-8 h-[2px] bg-brand-gold"></span><span class="text-brand-gold text-xs tracking-widest font-bold uppercase">Leadership</span></div>
+                    <div class="glass-card-3d rounded-[2rem] p-6 lg:p-10 grid md:grid-cols-3 gap-8 items-center">
+                        <img id="ceoPhotoImg" src="assets/ceo-default.jpg" class="w-64 h-64 rounded-2xl object-cover border-2 border-brand-gold/40 mx-auto">
+                        <div class="md:col-span-2">
+                            <h2 id="ceoName" class="font-heading text-3xl font-bold text-white">JATIN VARMA</h2>
+                            <p class="text-brand-gold text-sm font-semibold mt-1">CEO & Founder, A.J TRADERS</p>
+                            <p id="ceoBio" class="text-slate-300 text-sm mt-4 leading-relaxed">With over 10 years of experience in industrial packaging, Jatin Varma founded A.J TRADERS with a vision to provide premium quality bubble wrap at factory-direct prices. His commitment to quality and timely delivery has made A.J TRADERS a trusted name for 5000+ B2B clients across India.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VIDEO SECTION - NEW EDITABLE -->
+            <section class="py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex justify-between items-center mb-8"><h2 class="font-heading text-2xl font-bold">Our Packaging in Action</h2><span class="text-xs text-slate-400">Editable from Admin</span></div>
+                    <div class="glass-card-3d rounded-[2rem] p-2 lg:p-3">
+                        <div class="aspect-video rounded-[1.5rem] overflow-hidden bg-black">
+                            <iframe id="youtubeEmbed" class="w-full h-full" src="https://www.youtube.com/embed/9P5rS3_w3oo" title="Bubble Wrap Factory" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- WHY CHOOSE US SECTION PREVIEW -->
+            <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <span class="text-brand-gold text-xs font-bold tracking-widest uppercase">The A.J Advantage</span>
+                    <h2 class="text-3xl font-extrabold text-white mt-1">Why Top Warehouses Trust Us</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="glass-card-3d p-8 rounded-3xl">
+                        <div class="w-12 h-12 rounded-2xl bg-brand-gold/10 border border-brand-gold/40 text-brand-gold flex items-center justify-center text-xl mb-6">
+                            <i class="fa-solid fa-coins"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Zero Middleman Margin</h3>
+                        <p class="text-slate-400 text-xs leading-relaxed">Direct manufacturer-to-buyer model ensuring you get authentic factory pricing without distributor markups.</p>
+                    </div>
+
+                    <div class="glass-card-3d p-8 rounded-3xl">
+                        <div class="w-12 h-12 rounded-2xl bg-brand-gold/10 border border-brand-gold/40 text-brand-gold flex items-center justify-center text-xl mb-6">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Air Lock Technology</h3>
+                        <p class="text-slate-400 text-xs leading-relaxed">High-burst bubbles designed not to deflate under extreme transit pressure or heavy stacking.</p>
+                    </div>
+
+                    <div class="glass-card-3d p-8 rounded-3xl">
+                        <div class="w-12 h-12 rounded-2xl bg-brand-gold/10 border border-brand-gold/40 text-brand-gold flex items-center justify-center text-xl mb-6">
+                            <i class="fa-solid fa-truck-fast"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Priority Warehouse Shipping</h3>
+                        <p class="text-slate-400 text-xs leading-relaxed">Dedicated logistics fleet for immediate fulfillment across major industrial regions and e-commerce hubs.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= PAGE 2: PRODUCTS CATALOG ================= -->
+        <div id="page-products" class="page-view page-hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-brand-gold text-xs font-bold tracking-widest uppercase">Catalog</span>
+                <h2 class="text-3xl font-extrabold text-white mt-1">Industrial Packaging Range</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-card-3d rounded-3xl p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="w-full h-48 bg-slate-950 rounded-2xl border border-slate-800 flex items-center justify-center text-brand-gold text-5xl mb-6">
+                            <i class="fa-solid fa-scroll"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Standard Bubble Wrap Roll</h3>
+                        <p class="text-slate-400 text-xs mb-4">Single layer high-density virgin plastic bubble roll for general packaging.</p>
+                        <ul class="text-xs text-slate-300 space-y-2 mb-6">
+                            <li><i class="fa-solid fa-check text-brand-gold mr-2"></i>Thickness: 40 - 70 GSM</li>
+                            <li><i class="fa-solid fa-check text-brand-gold mr-2"></i>Width: 1m, 1.2m, 1.5m</li>
+                            <li><i class="fa-solid fa-check text-brand-gold mr-2"></i>Bubble Diameter: 10mm</li>
+                        </ul>
+                    </div>
+                    <button onclick="openModal('Standard Bubble Roll')" class="w-full gold-pill-btn text-brand-navy font-bold py-3 rounded-xl text-xs uppercase tracking-wider">Get Quote</button>
+                </div>
+
+                <div class="glass-card-3d rounded-3xl p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="w-full h-48 bg-slate-950 rounded-2xl border border-slate-800 flex items-center justify-center text-brand-gold text-5xl mb-6">
+                            <i class="fa-solid fa-layer-group"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Double Layer Heavy Duty Roll</h3>
+                        <p class="text-slate-400 text-xs mb-4">Laminated dual bubble wrap for heavy machinery, furniture, and export freight.</p>
+                        <ul class="text-xs text-slate-300 space-y-2 mb-6">
+                            <li><i class="fa-solid fa-check text-brand-gold mr-2"></i>Thickness: 80 - 120 GSM</li>
+                            <li><i class="fa-solid fa-check text-brand-gold mr-2"></i>High Puncture Strength</li>
+                            <li><i class="fa-solid fa-check text-brand-gold mr-2"></i>Custom Length Options</li>
+                        </ul>
+                    </div>
+                    <button onclick="openModal('Double Layer Roll')" class="w-full gold-pill-btn text-brand-navy font-bold py-3 rounded-xl text-xs uppercase tracking-wider">Get Quote</button>
+                </div>
+
+                <div class="glass-card-3d rounded-3xl p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="w-full h-48 bg-slate-950 rounded-2xl border border-slate-800 flex items-center justify-center text-brand-gold text-5xl mb-6">
+                            <i class="fa-solid fa-box"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Corrugated Cartons & Tapes</h3>
+                        <p class="text-slate-400 text-xs mb-4">Heavy burst factor corrugated boxes paired with high adhesion BOPP sealing tapes.</p>
+                        <ul class="text-xs text-slate-300 space-y-2 mb-6">
+                            <li><i class="fa-solid fa-check text-brand-gold mr-2"></i>3-Ply & 5-Ply Cartons</li>
+                            <li><i class="fa-solid fa-check text-brand-gold mr-2"></i>Transparent & Brown Tapes</li>
+                            <li><i class="fa-solid fa-check text-brand-gold mr-2"></i>Custom Brand Printing</li>
+                        </ul>
+                    </div>
+                    <button onclick="openModal('Cartons & Tapes')" class="w-full gold-pill-btn text-brand-navy font-bold py-3 rounded-xl text-xs uppercase tracking-wider">Get Quote</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= PAGE 3: GSM CALCULATOR ================= -->
+        <div id="page-gsm" class="page-view page-hidden max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
+            <div class="glass-card-3d p-8 rounded-3xl">
+                <div class="text-center mb-8">
+                    <span class="text-brand-gold text-xs font-bold tracking-widest uppercase">Technical Tool</span>
+                    <h2 class="text-2xl font-bold text-white mt-1">Bubble Wrap GSM & Weight Estimator</h2>
+                    <p class="text-slate-400 text-xs mt-1">Select dimensions to calculate total estimated roll weight for freight planning.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-6">
+                    <div>
+                        <label class="block text-xs text-slate-300 mb-2 font-semibold">Width (Meters)</label>
+                        <select id="calcWidth" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-white">
+                            <option value="1">1.0 Meter (3.28 ft)</option>
+                            <option value="1.2">1.2 Meters (3.93 ft)</option>
+                            <option value="1.5">1.5 Meters (4.92 ft)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-300 mb-2 font-semibold">Length (Meters)</label>
+                        <input type="number" id="calcLength" value="100" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-300 mb-2 font-semibold">Target GSM</label>
+                        <select id="calcGsm" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-white">
+                            <option value="40">40 GSM (Light Duty)</option>
+                            <option value="60">60 GSM (Standard)</option>
+                            <option value="80">80 GSM (Heavy Duty)</option>
+                            <option value="100">100 GSM (Extra Thick)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button onclick="calculateRollWeight()" class="w-full gold-pill-btn text-brand-navy font-bold py-3.5 rounded-xl uppercase text-xs tracking-wider">Calculate Estimated Roll Weight</button>
+
+                <div id="calcResult" class="mt-6 p-4 bg-slate-950/80 rounded-2xl border border-slate-800 text-center hidden">
+                    <span class="text-slate-400 text-xs block">Estimated Net Weight per Roll:</span>
+                    <span id="calcWeightOutput" class="text-2xl font-extrabold text-brand-gold mt-1 block">0.00 KG</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= PAGE 4: WHY CHOOSE US ================= -->
+        <div id="page-whyus" class="page-view page-hidden max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
+            <div class="glass-card-3d p-8 rounded-3xl">
+                <span class="text-brand-gold text-xs font-bold tracking-widest uppercase">Guaranteed Standards</span>
+                <h2 class="text-3xl font-extrabold text-white mt-1 mb-6">Why A.J TRADERS Stands Out</h2>
+
+                <div class="space-y-6 text-sm text-slate-300 leading-relaxed">
+                    <p>At **A.J TRADERS**, we don't just sell bubble rolls; we engineer protective packaging barriers. Ordinary bubble wrap often suffers from slow air leakage during prolonged warehouse storage—our air-retention technology locks air inside each bubble for months.</p>
+                    <p>We work directly with major e-commerce fulfillment hubs, logistics firms, glass manufacturers, and industrial exporters across India.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= PAGE 5: WHOLESALE RATES ================= -->
+        <div id="page-rates" class="page-view page-hidden max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
+            <div class="glass-card-3d rounded-3xl overflow-hidden p-6">
+                <h2 class="text-2xl font-bold text-white mb-4">Direct Wholesale Rate Indicator</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs text-slate-300">
+                        <thead class="bg-slate-950 text-brand-gold uppercase">
+                            <tr>
+                                <th class="p-3">Specification</th>
+                                <th class="p-3">Standard Dimensions</th>
+                                <th class="p-3">Min Order Qty</th>
+                                <th class="p-3">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800">
+                            <tr>
+                                <td class="p-3 font-bold text-white">40 GSM Single Layer</td>
+                                <td class="p-3">1m x 100m Roll</td>
+                                <td class="p-3">10 Rolls</td>
+                                <td class="p-3"><button onclick="openModal('40 GSM Rate')" class="text-brand-gold font-bold hover:underline">Get Price</button></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-white">60 GSM Heavy Duty</td>
+                                <td class="p-3">1m x 100m Roll</td>
+                                <td class="p-3">10 Rolls</td>
+                                <td class="p-3"><button onclick="openModal('60 GSM Rate')" class="text-brand-gold font-bold hover:underline">Get Price</button></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-white">100 GSM Double Layer</td>
+                                <td class="p-3">1.5m x 50m Roll</td>
+                                <td class="p-3">5 Rolls</td>
+                                <td class="p-3"><button onclick="openModal('100 GSM Rate')" class="text-brand-gold font-bold hover:underline">Get Price</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= PAGE 6: INDUSTRY BLOG ================= -->
+        <div id="page-blog" class="page-view page-hidden max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
+            <h2 class="text-3xl font-bold text-white mb-8">Packaging Insights & B2B Guides</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <article class="glass-card-3d p-6 rounded-3xl">
+                    <span class="text-brand-gold text-[10px] font-bold uppercase tracking-widest block mb-2">Guide</span>
+                    <h3 class="text-xl font-bold text-white mb-2">How to Select the Right GSM Bubble Wrap for E-Commerce Shipping</h3>
+                    <p class="text-slate-400 text-xs mb-4">Learn why 40 GSM works for garments while fragile electronics require at least 80 GSM double layer protection.</p>
+                    <button onclick="openModal('Blog Inquiry')" class="text-brand-gold font-bold text-xs uppercase tracking-wider">Read Full Article →</button>
+                </article>
+
+                <article class="glass-card-3d p-6 rounded-3xl">
+                    <span class="text-brand-gold text-[10px] font-bold uppercase tracking-widest block mb-2">Industry News</span>
+                    <h3 class="text-xl font-bold text-white mb-2">Reducing Transit Damages in Courier Shipments by 40%</h3>
+                    <p class="text-slate-400 text-xs mb-4">A complete breakdown of box layering, corner protection, and high burst-factor carton usage.</p>
+                    <button onclick="openModal('Blog Inquiry')" class="text-brand-gold font-bold text-xs uppercase tracking-wider">Read Full Article →</button>
+                </article>
+            </div>
+        </div>
+
+        <!-- ================= PAGE 7: ABOUT US ================= -->
+        <div id="page-about" class="page-view page-hidden max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
+            <div class="glass-card-3d p-8 rounded-3xl">
+                <h2 class="text-3xl font-bold text-white mb-4">About A.J TRADERS</h2>
+                <p class="text-slate-300 text-sm leading-relaxed mb-4">A.J TRADERS is a premier B2B trading house specializing in protective packaging materials. We bridge the gap between high-volume plastic extrusion manufacturing plants and end-user business enterprises.</p>
+                <p class="text-slate-300 text-sm leading-relaxed">Our state-of-the-art storage warehouse ensures uninterrupted stock availability for emergency bulk dispatch across major industrial regions.</p>
+            </div>
+        </div>
+
+        <!-- ================= PAGE 8: FAQS ================= -->
+        <div id="page-faq" class="page-view page-hidden max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
+            <h2 class="text-3xl font-bold text-white mb-8 text-center">Frequently Asked Questions</h2>
+            <div class="space-y-4">
+                <div class="glass-card-3d p-5 rounded-2xl">
+                    <h4 class="font-bold text-white text-sm">What is the Minimum Order Quantity (MOQ) for wholesale rates?</h4>
+                    <p class="text-xs text-slate-400 mt-2">Our standard wholesale rate applies to orders of 10 or more rolls. Smaller quantities can be dispatched via express courier.</p>
+                </div>
+                <div class="glass-card-3d p-5 rounded-2xl">
+                    <h4 class="font-bold text-white text-sm">Do you offer custom roll widths or bubble sizes?</h4>
+                    <p class="text-xs text-slate-400 mt-2">Yes! We can manufacture custom roll widths from 1ft up to 5ft on advance bulk contracts.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= PAGE 9: CONTACT US ================= -->
+        <div id="page-contact" class="page-view page-hidden max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
+            <div class="glass-card-3d p-8 rounded-3xl">
+                <h2 class="text-3xl font-bold text-white mb-6">Contact Factory Dispatch</h2>
+                <form onsubmit="handleFormSubmit(event)" class="space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <input type="text" placeholder="Your Name" required class="bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-white">
+                        <input type="tel" placeholder="Mobile Number" required class="bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-white">
+                    </div>
+                    <textarea rows="4" placeholder="Mention required roll GSM, width, and quantity..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-white"></textarea>
+                    <button type="submit" class="w-full gold-pill-btn text-brand-navy font-bold py-3.5 rounded-xl uppercase text-xs tracking-wider">Send Inquiry</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- ================= PAGE 10: PRIVATE INTERNAL ADMIN SYSTEM ================= -->
+        
+
+        <!-- FOOTER -->
+        <footer class="mt-auto bg-slate-950 border-t border-slate-800/80 py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8 text-xs text-slate-400">
+                <div>
+                    <span class="text-xl font-heading font-bold text-white block mb-2">A.J <span class="text-brand-gold">TRADERS</span></span>
+                    <p class="leading-relaxed mb-4">India's premier B2B manufacturer and wholesaler of high-density bubble wrap rolls, corrugated cartons, and packaging supplies.</p>
+                    <p>© <span id="footerYear">2026</span> A.J TRADERS. All Rights Reserved | Developed By <a href="https://webfixx-studio.github.io/Webfixx-Studio/" target="_blank" class="text-brand-gold hover:underline">WebFixx Studio</a></p>
+                </div>
+
+                <div>
+                    <span class="text-white font-bold block mb-3 uppercase tracking-wider text-xs">Quick Links</span>
+                    <ul class="space-y-2">
+                        <li><a href="javascript:void(0)" onclick="navigateTo('products')" class="hover:text-brand-gold">Product Catalog</a></li>
+                        <li><a href="javascript:void(0)" onclick="navigateTo('gsm')" class="hover:text-brand-gold">GSM Calculator Tool</a></li>
+                        <li><a href="javascript:void(0)" onclick="navigateTo('rates')" class="hover:text-brand-gold">Wholesale Pricing Index</a></li>
+                        <li><a href="javascript:void(0)" onclick="navigateTo('blog')" class="hover:text-brand-gold">Packaging Guides</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <span class="text-white font-bold block mb-3 uppercase tracking-wider text-xs">Factory Contact</span>
+                    <p class="mb-2"><i class="fa-solid fa-location-dot text-brand-gold mr-2"></i> Industrial Area, Warehouse Complex</p>
+                    <p class="mb-2"><i class="fa-solid fa-phone text-brand-gold mr-2"></i> +91 9999055398</p>
+                    <p><i class="fa-solid fa-envelope text-brand-gold mr-2"></i> ajtraders01052026@gmail.com</p>
+                </div>
+
+                <div>
+                    <span class="text-white font-bold block mb-3 uppercase tracking-wider text-xs">Internal Access</span>
+                    <p class="mb-3">Authorized management portal access only.</p>
+                    <button <!-- removed admin button --><button style="display:none">
+                        <i class="fa-solid fa-user-shield text-brand-gold mr-2"></i> Private Admin Portal
+                    </button>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- GLOBAL INQUIRY MODAL -->
+    <div id="modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="glass-card-3d p-6 sm:p-8 rounded-3xl max-w-md w-full relative shadow-2xl">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white w-8 h-8 rounded-full bg-slate-900 flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h3 class="text-2xl font-bold text-white mb-1">Wholesale Quote</h3>
+            <p class="text-xs text-brand-gold mb-6">A.J TRADERS Factory Rate Card Request</p>
+
+            <form onsubmit="handleFormSubmit(event)" class="space-y-4 text-xs">
+                <div>
+                    <label class="block text-slate-300 font-semibold mb-1">Your Name</label>
+                    <input type="text" required class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white">
+                </div>
+                <div>
+                    <label class="block text-slate-300 font-semibold mb-1">Phone / WhatsApp</label>
+                    <input type="tel" required class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white">
+                </div>
+                <div>
+                    <label class="block text-slate-300 font-semibold mb-1">Requirement</label>
+                    <select id="modalProduct" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white">
+                        <option value="Standard Bubble Wrap">Standard Bubble Wrap Rolls</option>
+                        <option value="Heavy Duty Double Layer">Heavy Duty Double Layer Rolls</option>
+                        <option value="Corrugated Cartons">Corrugated Cartons & Tapes</option>
+                    </select>
+                </div>
+                <button type="submit" class="w-full gold-pill-btn text-brand-navy font-bold py-3.5 rounded-xl uppercase text-xs tracking-wider">Submit Inquiry</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- THREE.JS INTERACTIVE BACKGROUND PARTICLES ENGINE -->
+    <script src="js/index.inline2.js"></script>
+
+
+<!-- SUPABASE DATABASE - CONFIG INSIDE CODE - API KEY INSIDE CODE - ALL PAGES CONNECTED -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="aj-shared-sync.js"></script>
+</body>
+</html>

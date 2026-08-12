@@ -1,0 +1,412 @@
+// @ts-nocheck
+// TypeScript source for A.J TRADERS shared synchronization layer.
+/* A.J TRADERS — GLOBAL CONTENT SYNC BRIDGE
+   Public pages: READ only. Admin: Supabase Auth + authenticated writes.
+   Existing public UI/UX is intentionally preserved. */
+(function () {
+    'use strict';
+    const CONFIG = {
+        SUPABASE_URL: 'https://bijohvnrjwcgwpypebcd.supabase.co',
+        SUPABASE_ANON_KEY: 'sb_publishable_N76NNPNlwRHFsCbVgH-1dQ_31ODG9nD',
+        ROW_ID: 'main', MEDIA_BUCKET: 'aj-traders-media',
+        ADMIN_EMAIL: 'ajtraders01052026@gmail.com'
+    };
+    const KEYS = ['aj_content', 'aj_faqs', 'aj_gallery', 'aj_stats', 'aj_testimonials', 'aj_blogs', 'aj_services', 'aj_whychoose', 'aj_process', 'aj_certificates', 'aj_quality', 'aj_products'];
+    const originalSetItem = Storage.prototype.setItem, originalRemoveItem = Storage.prototype.removeItem;
+    const isAdminPage = /\/admin\.html(?:$|[?#])/i.test(location.pathname + location.search + location.hash);
+    let timer = null, clientInstance = null, pullPromise = null, syncing = false, dirty = false;
+    function enabled() { return !!(CONFIG.SUPABASE_URL && CONFIG.SUPABASE_ANON_KEY && window.supabase); }
+    async function client() {
+        if (!enabled())
+            return null;
+        if (clientInstance)
+            return clientInstance;
+        try {
+            clientInstance = window.supabase.createClient(CONFIG.SUPABASE_URL, CONFIG.SUPABASE_ANON_KEY);
+            window.supabaseClient = clientInstance;
+            window.supabaseEnabled = true;
+            return clientInstance;
+        }
+        catch (e) {
+            console.error('A.J TRADERS Supabase init failed', e);
+            return null;
+        }
+    }
+    async function session() { const sb = await client(); if (!sb)
+        return null; const r = await sb.auth.getSession(); return r.data && r.data.session ? r.data.session : null; }
+    async function authorized() { const s = await session(); return !!(s && s.user && String(s.user.email || '').toLowerCase() === CONFIG.ADMIN_EMAIL.toLowerCase()); }
+    async function signIn(email, password) { const sb = await client(); if (!sb)
+        throw new Error('Supabase client unavailable'); const r = await sb.auth.signInWithPassword({ email: String(email || '').trim(), password: String(password || '') }); if (r.error)
+        throw r.error; if (!r.data.user || String(r.data.user.email || '').toLowerCase() !== CONFIG.ADMIN_EMAIL.toLowerCase()) {
+        await sb.auth.signOut();
+        throw new Error('This account is not authorized as the A.J TRADERS admin.');
+    } return r.data; }
+    async function signOut() { const sb = await client(); if (sb)
+        await sb.auth.signOut(); }
+    async function updatePassword(password) { const sb = await client(); if (!sb)
+        throw new Error('Supabase client unavailable'); const r = await sb.auth.updateUser({ password }); if (r.error)
+        throw r.error; return r.data; }
+    function payload() { const out = {}; KEYS.forEach(k => { const v = localStorage.getItem(k); if (v !== null) {
+        try {
+            out[k] = JSON.parse(v);
+        }
+        catch {
+            out[k] = v;
+        }
+    } }); return out; }
+    function esc(v) { return String(v == null ? '' : v).replace(/[&<>'"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[c]; }); }
+    function safeJson(key, fallback) { try {
+        const v = JSON.parse(localStorage.getItem(key) || 'null');
+        return v == null ? fallback : v;
+    }
+    catch {
+        return fallback;
+    } }
+    function renderFaqPublic() {
+        const data = safeJson('aj_faqs', null);
+        if (!Array.isArray(data))
+            return;
+        const items = document.querySelectorAll('.faq-item');
+        if (!items.length)
+            return;
+        data.forEach((it, i) => { if (!items[i])
+            return; const q = items[i].querySelector('h3'), a = items[i].querySelector('.faq-answer'); if (q)
+            q.textContent = it.q || ''; if (a)
+            a.textContent = it.a || ''; });
+        for (let i = data.length; i < items.length; i++)
+            items[i].remove();
+    }
+    function safeLoad() {
+        try {
+            ['loadSharedContent', 'loadShared', 'loadSharedFixed'].forEach(fn => { if (typeof window[fn] === 'function')
+                try {
+                    window[fn]();
+                }
+                catch (e) {
+                    console.warn(fn, e);
+                } });
+            ['loadGallery', 'loadBlogs', 'loadTestimonials', 'loadServices', 'loadCertificates'].forEach(fn => { if (typeof window[fn] === 'function')
+                try {
+                    window[fn]();
+                }
+                catch (e) {
+                    console.warn(fn, e);
+                } });
+            renderFaqPublic();
+            if (isAdminPage) {
+                if (typeof window.loadContentForm === 'function')
+                    window.loadContentForm();
+                if (typeof window.loadStatsForm === 'function')
+                    window.loadStatsForm();
+                if (typeof window.renderHero === 'function')
+                    window.renderHero();
+                if (typeof window.renderProd === 'function')
+                    window.renderProd();
+                if (typeof window.renderFaqEdit === 'function')
+                    window.renderFaqEdit();
+                if (typeof window.renderGalleryEdit === 'function')
+                    window.renderGalleryEdit();
+                if (typeof window.renderTestimonialEdit === 'function')
+                    window.renderTestimonialEdit();
+                if (typeof window.renderBlogEdit === 'function')
+                    window.renderBlogEdit();
+                if (typeof window.renderServicesEdit === 'function')
+                    window.renderServicesEdit();
+                if (typeof window.renderCertsEdit === 'function')
+                    window.renderCertsEdit();
+            }
+            applyGlobal(safeJson('aj_content', {}));
+            window.dispatchEvent(new CustomEvent('aj:data-updated'));
+        }
+        catch (e) {
+            console.warn('A.J TRADERS content render warning', e);
+        }
+    }
+    function apply(data) {
+        if (!data)
+            return;
+        KEYS.forEach(k => { if (Object.prototype.hasOwnProperty.call(data, k)) {
+            try {
+                originalSetItem.call(localStorage, k, JSON.stringify(data[k]));
+            }
+            catch { }
+        } });
+        safeLoad();
+    }
+    async function pull() {
+        if (pullPromise)
+            return pullPromise;
+        pullPromise = (async () => { const sb = await client(); if (!sb)
+            return false; try {
+            const r = await sb.from('aj_site_data').select('payload,updated_at').eq('id', CONFIG.ROW_ID).maybeSingle();
+            if (r.error)
+                throw r.error;
+            if (r.data && r.data.payload) {
+                apply(r.data.payload);
+                return true;
+            }
+            safeLoad();
+            return false;
+        }
+        catch (e) {
+            console.error('A.J TRADERS shared pull failed:', e);
+            if (isAdminPage)
+                window.AJSharedLastError = e;
+            safeLoad();
+            return false;
+        }
+        finally {
+            pullPromise = null;
+            if (isAdminPage && dirty)
+                queuePush(50);
+        } })();
+        return pullPromise;
+    }
+    const mediaCache = new Map();
+    function isDataUrl(v) { return typeof v === 'string' && /^data:image\/(png|jpe?g|webp|gif|svg\+xml);base64,/i.test(v); }
+    function extFromDataUrl(v) { const m = v.match(/^data:image\/([^;]+);base64,/i); let e = (m ? m[1] : 'png').toLowerCase(); if (e === 'jpeg')
+        e = 'jpg'; if (e === 'svg+xml')
+        e = 'svg'; return e; }
+    async function mediaUrl(dataUrl) {
+        if (!isDataUrl(dataUrl))
+            return dataUrl;
+        if (mediaCache.has(dataUrl))
+            return mediaCache.get(dataUrl);
+        if (!(await authorized()))
+            throw new Error('Admin authentication required for image upload.');
+        const sb = await client();
+        if (!sb)
+            throw new Error('Supabase client unavailable');
+        const blob = await (await fetch(dataUrl)).blob();
+        if (blob.size > 5 * 1024 * 1024)
+            throw new Error('Image too large. Maximum 5MB.');
+        if (!/^image\/(png|jpe?g|webp|gif|svg\+xml)$/i.test(blob.type))
+            throw new Error('Only PNG, JPG, WEBP, GIF or SVG images are allowed.');
+        const hashBuf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(dataUrl));
+        const hash = Array.from(new Uint8Array(hashBuf)).map(b => b.toString(16).padStart(2, '0')).join('').slice(0, 24);
+        const path = 'global/' + hash + '.' + extFromDataUrl(dataUrl);
+        const up = await sb.storage.from(CONFIG.MEDIA_BUCKET).upload(path, blob, { upsert: true, contentType: blob.type, cacheControl: '31536000' });
+        if (up.error)
+            throw up.error;
+        const pub = sb.storage.from(CONFIG.MEDIA_BUCKET).getPublicUrl(path), url = pub && pub.data && pub.data.publicUrl;
+        if (!url)
+            throw new Error('Could not create public media URL');
+        mediaCache.set(dataUrl, url);
+        return url;
+    }
+    const uploadDataUrl = mediaUrl;
+    async function externalizeImages(value) { if (isDataUrl(value))
+        return await mediaUrl(value); if (Array.isArray(value)) {
+        const a = [];
+        for (const v of value)
+            a.push(await externalizeImages(v));
+        return a;
+    } if (value && typeof value === 'object') {
+        const o = {};
+        for (const [k, v] of Object.entries(value))
+            o[k] = await externalizeImages(v);
+        return o;
+    } return value; }
+    async function preparePayload() { const out = await externalizeImages(payload()); Object.keys(out).forEach(k => { try {
+        originalSetItem.call(localStorage, k, JSON.stringify(out[k]));
+    }
+    catch { } }); return out; }
+    async function push() {
+        clearTimeout(timer);
+        if (!isAdminPage)
+            return false;
+        if (!(await authorized())) {
+            dirty = true;
+            window.AJSharedLastError = new Error('Admin authentication required.');
+            return false;
+        }
+        if (syncing) {
+            dirty = true;
+            return false;
+        }
+        if (pullPromise) {
+            dirty = true;
+            await pullPromise;
+        }
+        const sb = await client();
+        if (!sb)
+            return false;
+        syncing = true;
+        try {
+            const prepared = await preparePayload();
+            const body = { id: CONFIG.ROW_ID, payload: prepared, updated_at: new Date().toISOString() };
+            const r = await sb.from('aj_site_data').upsert(body, { onConflict: 'id' }).select('id').single();
+            if (r.error)
+                throw r.error;
+            dirty = false;
+            window.AJSharedLastError = null;
+            return true;
+        }
+        catch (e) {
+            dirty = true;
+            window.AJSharedLastError = e;
+            console.error('A.J TRADERS shared push failed:', e);
+            return false;
+        }
+        finally {
+            syncing = false;
+        }
+    }
+    function queuePush(delay = 350) { if (!isAdminPage)
+        return; dirty = true; clearTimeout(timer); timer = setTimeout(() => push(), delay); }
+    Storage.prototype.setItem = function (k, v) { originalSetItem.call(this, k, v); if (this === localStorage && KEYS.includes(k) && isAdminPage)
+        queuePush(); };
+    Storage.prototype.removeItem = function (k) { originalRemoveItem.call(this, k); if (this === localStorage && KEYS.includes(k) && isAdminPage)
+        queuePush(); };
+    async function getLeads() { const sb = await client(); if (!sb || !(await authorized()))
+        throw new Error('Admin authentication required.'); const r = await sb.from('aj_leads').select('*').order('created_at', { ascending: false }); if (r.error)
+        throw r.error; return r.data || []; }
+    async function deleteLead(id) { const sb = await client(); if (!sb || !(await authorized()))
+        throw new Error('Admin authentication required.'); const r = await sb.from('aj_leads').delete().eq('id', id); if (r.error)
+        throw r.error; return true; }
+    async function clearLeads() { const sb = await client(); if (!sb || !(await authorized()))
+        throw new Error('Admin authentication required.'); const r = await sb.from('aj_leads').delete().not('id', 'is', null); if (r.error)
+        throw r.error; return true; }
+    function newLeadId() { return Date.now() * 1000 + (crypto.getRandomValues(new Uint32Array(1))[0] % 1000); }
+    async function addLead(lead) { const sb = await client(); if (!sb)
+        throw new Error('Supabase unavailable'); const normalized = { id: lead.id || newLeadId(), name: String(lead.name || '').trim(), mobile: String(lead.mobile || '').trim(), email: String(lead.email || '').trim(), message: String(lead.message || '').trim(), date: lead.date || new Date().toLocaleString(), source: lead.source || location.pathname }; const r = await sb.from('aj_leads').insert(normalized); if (r.error)
+        throw r.error; return normalized; }
+    function bindLeadForms() {
+        window.handleFormSubmit = async function (e) { e.preventDefault(); const form = e.target; const name = (form.querySelector('[name="name"],#name') || form.querySelector('input[placeholder*="name" i]'))?.value || ''; const mobile = (form.querySelector('[name="mobile"],[name="phone"],#mobile,#phone') || form.querySelector('input[placeholder*="mobile" i],input[placeholder*="phone" i]'))?.value || ''; const email = (form.querySelector('[name="email"],#email') || form.querySelector('input[type="email"],input[placeholder*="email" i]'))?.value || ''; const message = (form.querySelector('[name="message"],#message') || form.querySelector('textarea'))?.value || ''; try {
+            await addLead({ name, mobile, email, message });
+            alert('Thank you! Your inquiry has been received. Our team will contact you soon.');
+            form.reset();
+        }
+        catch (err) {
+            console.error(err);
+            alert('We could not submit your inquiry right now. Please try again or contact us on WhatsApp.');
+        } };
+    }
+    function applyGlobal(c) {
+        c = c || {};
+        // Logo: every existing logo image marked data-global-logo is controlled by one field.
+        if (Object.prototype.hasOwnProperty.call(c, 'logo'))
+            document.querySelectorAll('img[data-global-logo="true"],img#siteLogo').forEach(img => { const fallback = img.dataset.defaultSrc || img.getAttribute('src') || ''; img.dataset.defaultSrc = fallback; if (c.logo)
+                img.src = c.logo;
+            else if (fallback)
+                img.src = fallback; });
+        const mobile = String(c.mobile == null ? '' : c.mobile).replace(/^\+91\s*/, '').replace(/\D/g, '');
+        if (Object.prototype.hasOwnProperty.call(c, 'mobile')) {
+            document.querySelectorAll('.contact-mobile,#footerMobile').forEach(el => el.textContent = mobile ? '+91 ' + mobile : '');
+            document.querySelectorAll('a[href^="tel:"]').forEach(a => a.href = mobile ? 'tel:+91' + mobile : '');
+        }
+        if (Object.prototype.hasOwnProperty.call(c, 'email')) {
+            document.querySelectorAll('.contact-email,#footerEmail').forEach(el => el.textContent = c.email || '');
+            document.querySelectorAll('a[href^="mailto:"]').forEach(a => a.href = c.email ? 'mailto:' + c.email : '');
+        }
+        if (Object.prototype.hasOwnProperty.call(c, 'address'))
+            document.querySelectorAll('.contact-address,#footerAddress').forEach(el => el.textContent = c.address || '');
+        if (Object.prototype.hasOwnProperty.call(c, 'whatsappUrl')) {
+            const wa = c.whatsappUrl || (mobile ? 'https://wa.me/' + mobile : '');
+            document.querySelectorAll('a[href*="wa.me"],a.wa-link,a[data-whatsapp]').forEach(a => a.href = wa);
+        }
+        if (Object.prototype.hasOwnProperty.call(c, 'instagram')) {
+            const el = document.getElementById('socialInstagram');
+            if (el)
+                el.href = c.instagram || '#';
+        }
+        if (Object.prototype.hasOwnProperty.call(c, 'youtubeChannel')) {
+            const el = document.getElementById('socialYoutube');
+            if (el)
+                el.href = c.youtubeChannel || '#';
+        }
+        if (Object.prototype.hasOwnProperty.call(c, 'facebook')) {
+            const el = document.getElementById('socialFacebook');
+            if (el)
+                el.href = c.facebook || '#';
+        }
+        if (Object.prototype.hasOwnProperty.call(c, 'ceoName'))
+            document.querySelectorAll('#ceoName,.ceo-name').forEach(el => el.textContent = c.ceoName || '');
+        if (Object.prototype.hasOwnProperty.call(c, 'ceoBio'))
+            document.querySelectorAll('#ceoBio,.ceo-bio').forEach(el => el.textContent = c.ceoBio || '');
+        if (Object.prototype.hasOwnProperty.call(c, 'ceoPhoto'))
+            document.querySelectorAll('#ceoPhotoImg,.ceo-photo').forEach(img => { const fallback = img.dataset.defaultSrc || img.getAttribute('src') || ''; img.dataset.defaultSrc = fallback; if (c.ceoPhoto)
+                img.src = c.ceoPhoto;
+            else if (fallback)
+                img.src = fallback; });
+        const raw = c.youtubeRaw || c.youtube || c.youtubeEmbed || '';
+        const id = extractYT(raw);
+        const src = id ? 'https://www.youtube.com/embed/' + id + '?rel=0&modestbranding=1' : (c.youtubeEmbed || c.youtube || '');
+        if (src)
+            document.querySelectorAll('#youtubeEmbed,#youtubeVideo,#company-video-iframe').forEach(el => el.src = src);
+        const heroes = { 'hero_home': 'img_hero_home', 'hero_products': 'img_hero_products', 'hero_services': 'img_hero_services', 'hero_about': 'img_hero_about', 'hero_certificates': 'img_hero_certificates', 'hero_contact': 'img_hero_contact', 'hero_faq': 'img_hero_faq', 'hero_gallery': 'img_hero_gallery', 'hero_blog': 'img_hero_blog', 'hero_clients': 'img_hero_clients' };
+        Object.entries(heroes).forEach(([dom, key]) => { const h = document.getElementById(dom); if (h && c[key]) {
+            h.style.setProperty('--hero-img', "url('" + c[key] + "')");
+            if (h.classList.contains('hero-warehouse-bg'))
+                h.style.background = "linear-gradient(180deg,rgba(5,11,20,.88) 0%,rgba(11,19,37,.95) 100%),url('" + c[key] + "') center/cover no-repeat fixed";
+        } });
+        ['img_prod_05', 'img_prod_10', 'img_prod_12', 'img_prod_15', 'img_prod_tape', 'img_about'].forEach(k => { if (c[k]) {
+            const el = document.getElementById(k);
+            if (el)
+                el.src = c[k];
+        } });
+        const stats = safeJson('aj_stats', null);
+        if (stats) {
+            [['stat1_num', 'footerStat1_num', 'stat1_label', 'footerStat1_label', 's1_num', 's1_label'], ['stat2_num', 'footerStat2_num', 'stat2_label', 'footerStat2_label', 's2_num', 's2_label'], ['stat3_num', 'footerStat3_num', 'stat3_label', 'footerStat3_label', 's3_num', 's3_label'], ['stat4_num', 'footerStat4_num', 'stat4_label', 'footerStat4_label', 's4_num', 's4_label'], ['stat5_num', 'footerStat5_num', 'stat5_label', 'footerStat5_label', 's5_num', 's5_label'], ['stat6_num', 'footerStat6_num', 'stat6_label', 'footerStat6_label', 's6_num', 's6_label']].forEach(x => { [x[0], x[1]].forEach(id => { const n = document.getElementById(id); if (n)
+                n.textContent = stats[x[4]] || ''; }); [x[2], x[3]].forEach(id => { const l = document.getElementById(id); if (l)
+                l.textContent = stats[x[5]] || ''; }); });
+        }
+        const fy = document.getElementById('footerYear');
+        if (fy)
+            fy.textContent = new Date().getFullYear();
+    }
+    function toggleMobileNav() { const m = document.getElementById('mobile-nav') || document.getElementById('mMenu') || document.getElementById('mobile-nav-drawer'); if (m)
+        m.classList.toggle('hidden'); }
+    function navigateTo(target) { const routes = { products: 'products.html', blog: 'blog.html', contact: 'contact.html', faq: 'faq.html', gallery: 'gallery.html', clients: 'clients.html', services: 'services.html', certificates: 'certificates.html', about: 'about.html' }; if (routes[target]) {
+        location.href = routes[target];
+        return;
+    } const views = document.querySelectorAll('.page-view'); if (views.length) {
+        views.forEach(v => v.classList.add('page-hidden'));
+        const el = document.getElementById('page-' + target);
+        if (el) {
+            el.classList.remove('page-hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    } }
+    function calculateRollWeight() { const w = parseFloat(document.getElementById('calcWidth')?.value) || 0; const l = parseFloat(document.getElementById('calcLength')?.value) || 0; const gsm = parseFloat(document.getElementById('calcGsm')?.value) || 0; const kg = (w * l * gsm) / 1000; const out = document.getElementById('calcWeightOutput'), box = document.getElementById('calcResult'); if (out)
+        out.textContent = kg.toFixed(2) + ' KG'; if (box)
+        box.classList.remove('hidden'); return kg; }
+    function switchAdminTab(i) { const tabs = document.querySelectorAll('#page-admin .p-6.bg-slate-900\/60'); if (tabs.length)
+        tabs.forEach((t, n) => t.classList.toggle('hidden', n !== i - 1)); }
+    function extractYT(url) {
+        if (!url)
+            return null;
+        let s = String(url).trim();
+        if (/^[A-Za-z0-9_-]{11}$/.test(s))
+            return s;
+        try {
+            const u = new URL(s);
+            const host = u.hostname.replace(/^www\./, '').toLowerCase();
+            let id = null;
+            if (host === 'youtu.be')
+                id = u.pathname.split('/').filter(Boolean)[0];
+            else if (host === 'youtube.com' || host === 'm.youtube.com' || host === 'youtube-nocookie.com') {
+                if (u.searchParams.get('v'))
+                    id = u.searchParams.get('v');
+                else {
+                    const parts = u.pathname.split('/').filter(Boolean);
+                    const i = parts.findIndex(x => ['embed', 'shorts', 'live', 'v', 'e'].includes(x));
+                    if (i >= 0)
+                        id = parts[i + 1];
+                }
+            }
+            return id && /^[A-Za-z0-9_-]{11}$/.test(id) ? id : null;
+        }
+        catch {
+            return null;
+        }
+    }
+    window.AJShared = { pull, push, flush: () => push(), enabled, getConfig: () => ({ url: CONFIG.SUPABASE_URL }), uploadDataUrl, extractYouTubeId: extractYT, signIn, signOut, updatePassword, getSession: session, isAuthorizedAdmin: authorized, getLeads, deleteLead, clearLeads, addLead, newLeadId, escapeHTML: esc, toggleMobileNav, navigateTo, calculateRollWeight, switchAdminTab, isAdmin: isAdminPage };
+    window.toggleMobileNav = toggleMobileNav;
+    window.navigateTo = navigateTo;
+    window.calculateRollWeight = calculateRollWeight;
+    window.switchAdminTab = switchAdminTab;
+    window.addEventListener('DOMContentLoaded', () => { client(); bindLeadForms(); pull(); });
+    window.addEventListener('storage', e => { if (KEYS.includes(e.key))
+        safeLoad(); });
+})();
